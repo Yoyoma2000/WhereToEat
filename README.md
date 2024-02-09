@@ -38,8 +38,10 @@ just want to see their options.
 
 **Phase 1:**
 - As a user, I want to be able to store information about a restaurant.
-- As a user, I want to be able to see the list of restaurant entries.
+- As a user, I want to be able to see the list of restaurant entries. 
 - As a user, I want to be able to see the amount of restaurants in the database.
 - As a user, I want to be able to access a restaurant's information from the database.
+
+**Phase 2:**
 - As a user, I want to be able to save the database before closing the program.
 - As a user, I want to be able to load the database when opening the program.
