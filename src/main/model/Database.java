@@ -40,8 +40,8 @@ public class Database {
     //REQUIRES: name and cityName must not match another name and cityName
     //MODIFIES: this
     //EFFECTS: adds a new restaurant to the database
-    public void addRestaurant(String name, String genre, int rating, String cityName, double x, double y) {
-        Restaurant restaurant = new Restaurant(name, genre, rating, cityName, x, y);
+    public void addRestaurant(String name, String genre, int rating, Location location) {
+        Restaurant restaurant = new Restaurant(name, genre, rating, location);
         dataBase.add(restaurant);
     }
 

@@ -2,8 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public class Restaurant {
     private String name;
@@ -22,13 +21,13 @@ public class Restaurant {
         this.location = new Location("", 0, 0);
     }
 
-    public Restaurant(String name, String genre, int rating, String cityName, double x, double y) {
+    public Restaurant(String name, String genre, int rating, Location location) {
         this.name = name;
         this.genre = genre;
         this.rating = rating;
         this.favourite = false;
         this.menu = new ArrayList<>();
-        this.location = new Location(cityName, x, y);
+        this.location = location;
     }
 
     public String getName() {
@@ -77,18 +76,20 @@ public class Restaurant {
         return menu;
     }
 
-    public void addToMenu(String name, double price) {
-        MenuItem item = new MenuItem(name, price);
+    public void addToMenu(MenuItem item) {
         menu.add(item);
     }
 
     //REQUIRES: X and Y values should be within [-100,100] (For the sake of simplicity)
     //MODIFIES: nothing
-    //EFFECTS: Returns distance of restaurant to current location
-    public double getDistance(double x, double y) {
-        double targetX = location.getX();
-        double targetY = location.getY();
-        double distance = sqrt(pow((targetX - x),2) + pow((targetY - y),2));
+    //EFFECTS: Returns aboslute distance of restaurant to current location
+    public double getDistance(Location location) {
+        double targetX = this.location.getX();
+        double targetY = this.location.getY();
+        double currX = location.getX();
+        double currY = location.getY();
+        double distance = sqrt(pow((targetX - currX),2) + pow((targetY - currY),2));
+        distance = abs(distance);
         return distance;
     }
 
