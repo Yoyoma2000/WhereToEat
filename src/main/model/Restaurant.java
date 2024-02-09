@@ -89,7 +89,6 @@ public class Restaurant {
         double currX = location.getX();
         double currY = location.getY();
         double distance = sqrt(pow((targetX - currX),2) + pow((targetY - currY),2));
-        distance = abs(distance);
         return distance;
     }
 

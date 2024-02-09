@@ -28,31 +28,31 @@ class RestaurantTest {
 
     @Test
     void testConstructor(){
-        assertEquals(testRestaurant.getName(), "Joe's BBQ");
-        assertEquals(testRestaurant1.getName(), "Chicken Palace");
-        assertEquals(testRestaurant1.getGenre(), "American");
-        assertEquals(testRestaurant1.getRating(), 5);
-        assertEquals(testRestaurant1.getLocation().getCityName(), "Burnaby");
-        assertEquals(testRestaurant1.getLocation().getX(), 46);
-        assertEquals(testRestaurant1.getLocation().getY(), 67);
+        assertEquals("Joe's BBQ", testRestaurant.getName());
+        assertEquals("Chicken Palace", testRestaurant1.getName());
+        assertEquals("American", testRestaurant1.getGenre());
+        assertEquals(5, testRestaurant1.getRating());
+        assertEquals("Burnaby", testRestaurant1.getLocation().getCityName());
+        assertEquals(46, testRestaurant1.getLocation().getX());
+        assertEquals(67, testRestaurant1.getLocation().getY());
     }
 
     @Test
     void testLocation(){
-        assertEquals(testRestaurant.getLocation().getCityName() , "");
+        assertEquals("", testRestaurant.getLocation().getCityName());
         testRestaurant.setLocation("Surrey", -40, -50);
-        assertEquals(testRestaurant.getLocation().getCityName() , "");
-        assertEquals(testRestaurant.getLocation().getX() , -40);
-        assertEquals(testRestaurant.getLocation().getY() , -50);
+        assertEquals("Surrey", testRestaurant.getLocation().getCityName());
+        assertEquals(-40, testRestaurant.getLocation().getX());
+        assertEquals(-50, testRestaurant.getLocation().getY());
     }
 
     @Test
     void testAddToMenu(){
-        assertEquals(testRestaurant.getMenu().size(), 0);
+        assertEquals(0, testRestaurant.getMenu().size());
         testRestaurant.addToMenu(testItem1);
-        assertEquals(testRestaurant.getMenu().size(), 1);
-        assertEquals(testRestaurant.getMenu().get(0), testItem1);
-        assertEquals(testRestaurant.getMenu().get(0).getFoodName(), "Chicken");
+        assertEquals(1, testRestaurant.getMenu().size());
+        assertEquals(testItem1, testRestaurant.getMenu().get(0));
+        assertEquals("Chicken", testRestaurant.getMenu().get(0).getFoodName());
     }
 
     @Test
@@ -61,32 +61,32 @@ class RestaurantTest {
         testRestaurant.addToMenu(testItem2);
         testRestaurant.addToMenu(testItem3);
 
-        assertEquals(testRestaurant.getMenu().get(0), testItem1);
-        assertEquals(testRestaurant.getMenu().get(0).getPrice(), 10.00);
-        assertEquals(testRestaurant.getMenu().get(0), testItem2);
-        assertEquals(testRestaurant.getMenu().get(0).getPrice(), 20.00);
-        assertEquals(testRestaurant.getMenu().get(0), testItem3);
-        assertEquals(testRestaurant.getMenu().get(0).getPrice(), 30.00);
+        assertEquals(testItem1, testRestaurant.getMenu().get(0));
+        assertEquals(10.00, testRestaurant.getMenu().get(0).getPrice());
+        assertEquals(testItem2, testRestaurant.getMenu().get(1));
+        assertEquals(20.00, testRestaurant.getMenu().get(1).getPrice());
+        assertEquals(testItem3, testRestaurant.getMenu().get(2));
+        assertEquals(30.00, testRestaurant.getMenu().get(2).getPrice());
     }
 
     @Test
     void testGetDistance(){
-        assertEquals(testRestaurant.getDistance(testLocation1), sqrt(pow((46 - 40),2) + pow((67 - 60),2)));
+        assertEquals(sqrt(pow(6,2) + pow(7,2)), testRestaurant1.getDistance(testLocation1));
     }
 
     @Test
     void testGetAvgPrice(){
         testRestaurant.addToMenu(testItem1);
-        assertEquals(testRestaurant.getAvgPrice(), 10);
+        assertEquals(10, testRestaurant.getAvgPrice());
         testRestaurant.addToMenu(testItem2);
-        assertEquals(testRestaurant.getAvgPrice(), 15);
+        assertEquals(15, testRestaurant.getAvgPrice());
         testRestaurant.addToMenu(testItem3);
-        assertEquals(testRestaurant.getAvgPrice(), 20);
+        assertEquals(20, testRestaurant.getAvgPrice());
     }
 
     @Test
     void testToString(){
-        assertEquals(testRestaurant.toString(), "[name =Joe's BBQ, ]");
-        assertEquals(testRestaurant.toString(), "[name =Chicken Palace, ]");
+        assertEquals("[name =Joe's BBQ, ]", testRestaurant.toString());
+        assertEquals("[name =Chicken Palace, ]", testRestaurant1.toString());
     }
 }
