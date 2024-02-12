@@ -11,14 +11,15 @@ public class Database {
 
     public Database() {
         dataBase = new ArrayList<Restaurant>();
-        processedDataBase = dataBase;
+        processedDataBase = new ArrayList<Restaurant>();
     }
 
     //REQUIRES: nothing
     //MODIFIES: this
     //EFFECTS: makes both databases same again
     public void resetProcessedDataBase() {
-        processedDataBase = dataBase;
+        processedDataBase.clear();
+        processedDataBase.addAll(dataBase);
     }
 
     public ArrayList<Restaurant> getDataBase() {
@@ -29,11 +30,10 @@ public class Database {
         return processedDataBase;
     }
 
-    //REQUIRES: nothing
+    //REQUIRES: no repeat restaurant objects
     //MODIFIES: this
     //EFFECTS: adds a new restaurant to the database
-    public void addRestaurant(String name) {
-        Restaurant restaurant = new Restaurant(name);
+    public void addRestaurant(Restaurant restaurant) {
         dataBase.add(restaurant);
     }
 
