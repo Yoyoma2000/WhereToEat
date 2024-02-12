@@ -27,4 +27,9 @@ public class MenuItem {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Dish Name = " + foodName + " | Price ($): " + price;
+    }
 }

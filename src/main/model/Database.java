@@ -50,7 +50,8 @@ public class Database {
     //EFFECTS: finds position of restaurant in processedDataBase, -1 if unable to find it.
     public int searchDatabase(String name, String cityName) {
         for (Restaurant res: processedDataBase) {
-            if (name.equals(res.getName()) && cityName.equals(res.getLocation().getCityName())) {
+            if (name.equals(res.getName().toLowerCase())
+                    && cityName.equals(res.getLocation().getCityName().toLowerCase())) {
                 return dataBase.indexOf(res);
             }
         }
