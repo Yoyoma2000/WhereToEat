@@ -75,13 +75,17 @@ public class DatabaseTest {
         testData.addRestaurant(name, genre, rating, location3);
         testData.resetProcessedDataBase();
 
-        assertEquals(0, testData.searchDatabase("Pizza", "Burnaby"));
-        assertEquals(1, testData.searchDatabase("Stirfry", "Langley"));
-        assertEquals(2, testData.searchDatabase("BBQ", "Surrey"));
+        assertEquals(0, testData.searchDatabase("pizza", "burnaby"));
+        assertEquals(1, testData.searchDatabase("stirfry", "langley"));
+        assertEquals(2, testData.searchDatabase("bbq", "surrey"));
 
-        assertEquals(-1, testData.searchDatabase("Wrong Name", "Burnaby"));
-        assertEquals(-1, testData.searchDatabase("Pizza", "Wrong Name"));
-        assertEquals(-1, testData.searchDatabase("Wrong Name", "Wrong Name"));
+        assertEquals(0, testData.searchDatabase("pizza", "burnaby"));
+        assertEquals(1, testData.searchDatabase("stirfry", "langley"));
+        assertEquals(2, testData.searchDatabase("bbq", "surrey"));
+
+        assertEquals(-1, testData.searchDatabase("wrong name", "burnaby"));
+        assertEquals(-1, testData.searchDatabase("pizza", "wrong name"));
+        assertEquals(-1, testData.searchDatabase("wrong name", "wrong name"));
     }
 
 }
