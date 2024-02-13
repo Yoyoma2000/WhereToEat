@@ -16,7 +16,7 @@ class RestaurantTest {
     private MenuItem testItem3;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         testLocation = new Location("Burnaby", 46, 67);
         testLocation1 = new Location("Metrotown", 40, 60);
         testRestaurant = new Restaurant("Joe's BBQ");
@@ -27,7 +27,7 @@ class RestaurantTest {
     }
 
     @Test
-    void testConstructor(){
+    void testConstructor() {
         assertEquals("Joe's BBQ", testRestaurant.getName());
         assertEquals("Chicken Palace", testRestaurant1.getName());
         assertEquals("American", testRestaurant1.getGenre());
@@ -38,7 +38,34 @@ class RestaurantTest {
     }
 
     @Test
-    void testLocation(){
+    void testSetName() {
+        testRestaurant.setName("ChongQing");
+        assertEquals("ChongQing", testRestaurant.getName());
+    }
+
+    @Test
+    void testSetGenre() {
+        testRestaurant.setGenre("Chinese");
+        assertEquals("Chinese", testRestaurant.getGenre());
+    }
+
+    @Test
+    void testSetRating() {
+        testRestaurant.setRating(10);
+        assertEquals(10, testRestaurant.getRating());
+    }
+
+    @Test
+    void testToggleFavourite() {
+        assertFalse(testRestaurant.isFavourite());
+        testRestaurant.toggleFavourite();
+        assertTrue(testRestaurant.isFavourite());
+        testRestaurant.toggleFavourite();
+        assertFalse(testRestaurant.isFavourite());
+    }
+
+    @Test
+    void testSetLocation() {
         assertEquals("", testRestaurant.getLocation().getCityName());
         testRestaurant.setLocation("Surrey", -40, -50);
         assertEquals("Surrey", testRestaurant.getLocation().getCityName());
@@ -47,7 +74,7 @@ class RestaurantTest {
     }
 
     @Test
-    void testAddToMenu(){
+    void testAddToMenu() {
         assertEquals(0, testRestaurant.getMenu().size());
         testRestaurant.addToMenu(testItem1);
         assertEquals(1, testRestaurant.getMenu().size());
@@ -56,7 +83,7 @@ class RestaurantTest {
     }
 
     @Test
-    void testMultipleAddToMenu(){
+    void testMultipleAddToMenu() {
         testRestaurant.addToMenu(testItem1);
         testRestaurant.addToMenu(testItem2);
         testRestaurant.addToMenu(testItem3);
@@ -75,7 +102,7 @@ class RestaurantTest {
     }
 
     @Test
-    void testGetAvgPrice(){
+    void testGetAvgPrice() {
         testRestaurant.addToMenu(testItem1);
         assertEquals(10, testRestaurant.getAvgPrice());
         testRestaurant.addToMenu(testItem2);
@@ -85,7 +112,7 @@ class RestaurantTest {
     }
 
     @Test
-    void testToString(){
+    void testToString() {
         assertEquals("[name =Joe's BBQ, ]", testRestaurant.toString());
         assertEquals("[name =Chicken Palace, ]", testRestaurant1.toString());
     }

@@ -17,7 +17,7 @@ public class DatabaseTest {
     private Location location3;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         testData = new Database();
         location1 = new Location("Burnaby", 100,100);
         restTest1 = new Restaurant("Pizza", "Italian", 5, location1);
@@ -31,20 +31,20 @@ public class DatabaseTest {
     }
 
     @Test
-    void testConstructor(){
+    void testConstructor() {
         assertEquals(0, testData.getDataBase().size());
         assertEquals(0, testData.getProcessedDataBase().size());
     }
 
     @Test
-    void testAddRestaurant(){
+    void testAddRestaurant() {
         testData.addRestaurant(restTest1);
         assertEquals(1, testData.getDataBase().size());
         assertEquals(restTest1, testData.getDataBase().get(0));
     }
 
     @Test
-    void testAddMultipleRestaurant(){
+    void testAddMultipleRestaurant() {
         testData.addRestaurant(restTest1);
         assertEquals(1, testData.getDataBase().size());
         assertEquals(restTest1, testData.getDataBase().get(0));
@@ -57,7 +57,7 @@ public class DatabaseTest {
         assertEquals(genre, testData.getDataBase().get(2).getGenre());
     }
     @Test
-    void testResetProcessedDataBase(){
+    void testResetProcessedDataBase() {
         testData.addRestaurant(restTest1);
         testData.addRestaurant(restTest2);
         assertEquals(2, testData.getDataBase().size());
@@ -69,7 +69,7 @@ public class DatabaseTest {
 
 
     @Test
-    void testSearchDataBase(){
+    void testSearchDataBase() {
         testData.addRestaurant(restTest1);
         testData.addRestaurant(restTest2);
         testData.addRestaurant(name, genre, rating, location3);

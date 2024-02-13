@@ -58,8 +58,14 @@ public class Restaurant {
         this.rating = rating;
     }
 
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
+    // MODIFIES: this
+    // EFFECTS: toggles favourite between true and false
+    public void toggleFavourite() {
+        if (favourite) {
+            favourite = false;
+        } else {
+            favourite = true;
+        }
     }
 
     public Location getLocation() {
