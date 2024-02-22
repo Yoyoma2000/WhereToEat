@@ -3,6 +3,7 @@ package model;
 import java.lang.Math;
 import static java.lang.Math.sqrt;
 
+// This class represents an individual dish that a restaurant has in its menu
 public class MenuItem {
     private String foodName;
     private double price;

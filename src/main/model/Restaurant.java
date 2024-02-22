@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
+// Ths class represents information about a restaurant
 public class Restaurant {
     private String name;
     private String genre;

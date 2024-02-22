@@ -45,3 +45,10 @@ just want to see their options.
 **Phase 2:**
 - As a user, I want to be able to save the database before closing the program.
 - As a user, I want to be able to load the database when opening the program.
+- As a user, I want to be prompted to save right before closing the program.
+- As a user, I want to have the program randomly choose a restaurant for me
+- As a user, I want to filter the database
+- As a user, I want to sort the database
+- As a user, I want to be able to save my filter and sort preference.
+- As a user, I want to be able to load my filter and sort preference.
+- As a user, I want to see the size of my filtered database

@@ -1,5 +1,6 @@
 package model;
 
+// This class represents the location name and coordinate (not actual) of a restaurant
 public class Location {
     private String cityName;
     private double coordX;

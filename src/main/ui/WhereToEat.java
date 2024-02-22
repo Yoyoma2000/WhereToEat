@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// This class is the UI that controls the restaurant and database classes
 public class WhereToEat {
     private Scanner input;
     private Database database;

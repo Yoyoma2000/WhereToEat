@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
+// This class stores a list of restaurants
 public class Database {
     private ArrayList<Restaurant> dataBase;
     private ArrayList<Restaurant> processedDataBase; //Database after sort and filter
