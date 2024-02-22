@@ -58,4 +58,29 @@ public class Database {
         }
         return -1;
     }
+
+    //REQUIRES: nothing
+    //MODIFIES: nothing
+    //EFFECTS: Chooses a random restaurant from the given dataBase (processed or not)
+    public Restaurant randomRestaurant(ArrayList dataBase) {
+        int max = dataBase.size();
+        int randomPos = (int) Math.floor(Math.random() * (max - 0) + 0);
+        return (Restaurant) dataBase.get(randomPos);
+    }
+
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: sorts the list by specified information
+    public void sortDatabase(String sortByThis) {
+
+    }
+
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: filters the list by specified information
+    public void filterDatabase(String category, String specific) {
+
+    }
+
+
 }

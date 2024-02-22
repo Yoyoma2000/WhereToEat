@@ -88,4 +88,15 @@ public class DatabaseTest {
         assertEquals(-1, testData.searchDatabase("wrong name", "wrong name"));
     }
 
+    @Test
+    void testRandomizeRestaurant() {
+        testData.addRestaurant(restTest1);
+        testData.addRestaurant(restTest2);
+        testData.addRestaurant(name, genre, rating, location3);
+        testData.resetProcessedDataBase();
+
+        assertTrue(testData.getDataBase().contains(testData.randomRestaurant(testData.getDataBase())));
+        assertTrue(testData.getDataBase().contains(testData.randomRestaurant(testData.getProcessedDataBase())));
+    }
+
 }

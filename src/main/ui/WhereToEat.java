@@ -97,6 +97,7 @@ public class WhereToEat {
         System.out.println("\t info - learn about a restaurant");
         System.out.println("\t add - add new restaurant");
         System.out.println("\t quit - Exits Program");
+        System.out.println("\t random - Arbitrarily choose a restaurant for you");
         System.out.println("<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>");
     }
 
@@ -111,6 +112,8 @@ public class WhereToEat {
             doInfo(-1);
         } else if (userInput.equals("add")) {
             doAdd();
+        } else if (userInput.equals("random")) {
+            doRandom();
         } else {
             System.out.println("No function is associated with this input.");
         }
@@ -143,6 +146,7 @@ public class WhereToEat {
     // MODIFIES: this
     // EFFECTS: lists out all restaurants
     private void doList() {
+        System.out.println("\n List size: " + database.getProcessedDataBase().size());
         System.out.println("\n Index | Name | Genre | Rating | City | Distance");
         for (Restaurant r: database.getProcessedDataBase()) {
             double distance = r.getDistance(currLocation);
@@ -206,6 +210,7 @@ public class WhereToEat {
         System.out.println("Added new restaurant!");
     }
 
+    // EFFECTS: shows restaurant info
     private void seeRestaurant(Restaurant r) {
         double distance = r.getDistance(currLocation);
         String city = r.getLocation().getCityName();
@@ -215,6 +220,7 @@ public class WhereToEat {
                 + avgPrice + "\n Favourite: " + r.isFavourite());
     }
 
+    // EFFECTS: shows restaurant menu list
     private void seeMenu(Restaurant r) {
         System.out.println("\n Menu:");
         for (MenuItem food: r.getMenu()) {
@@ -240,6 +246,32 @@ public class WhereToEat {
             System.out.println("Updated Menu! Add another? y/n");
             if (!input.nextLine().equals("y")) {
                 keepAdding = false;
+            }
+        }
+    }
+
+    // EFFECTS: chooses random dish
+    private void doRandom() {
+        Restaurant random;
+        String preference;
+        System.out.println("\n Randomized from filtered? y/n");
+        preference = input.nextLine();
+        if (preference.equals("y")) {
+            random = database.randomRestaurant(database.getProcessedDataBase());
+        } else {
+            random = database.randomRestaurant(database.getDataBase());
+        }
+        System.out.println("\n We found a restaurant: " + random.getName());
+        System.out.println("\n See info? y/n");
+        preference = input.nextLine();
+        input.reset();
+        if (preference.equals("y")) {
+            doInfo(database.getDataBase().indexOf(random));
+        } else {
+            System.out.println("\n Randomize again? y/n");
+            preference = input.nextLine();
+            if (preference.equals("y")) {
+                doRandom();
             }
         }
     }
