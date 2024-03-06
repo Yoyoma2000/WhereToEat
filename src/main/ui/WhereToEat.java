@@ -83,6 +83,27 @@ public class WhereToEat {
         database.addRestaurant(r2);
         database.addRestaurant(r3);
         database.resetProcessedDataBase();
+        loadExampleMenuItems();
+    }
+
+    // EFFECTS: adds menu items into database
+    private void loadExampleMenuItems() {
+        MenuItem chipotle1 = new MenuItem("Bowl", 15);
+        MenuItem chipotle2 = new MenuItem("Taco", 10);
+        MenuItem pot1 = new MenuItem("tomato", 30);
+        MenuItem pot2 = new MenuItem("yinyang", 25);
+        MenuItem pho1 = new MenuItem("House Special", 12);
+        MenuItem pho2 = new MenuItem("Spicy", 18);
+        MenuItem lulu1 = new MenuItem("Beef shank", 6.5);
+        MenuItem lulu2 = new MenuItem("Lamb", 8.5);
+        database.getDataBase().get(0).addToMenu(chipotle1);
+        database.getDataBase().get(0).addToMenu(chipotle2);
+        database.getDataBase().get(1).addToMenu(pot1);
+        database.getDataBase().get(1).addToMenu(pot2);
+        database.getDataBase().get(2).addToMenu(pho1);
+        database.getDataBase().get(2).addToMenu(pho2);
+        database.getDataBase().get(3).addToMenu(lulu1);
+        database.getDataBase().get(3).addToMenu(lulu2);
     }
 
     // EFFECTS: shows console home screen with welcome message and commands
@@ -94,10 +115,11 @@ public class WhereToEat {
         System.out.println("Commands:");
         System.out.println("\t search - find a restaurant by name and city");
         System.out.println("\t list - list restaurants");
+        System.out.println("\t random - arbitrarily choose a restaurant for you");
+        System.out.println("\t sort - sorts the database by a restaurant field");
         System.out.println("\t info - learn about a restaurant");
         System.out.println("\t add - add new restaurant");
         System.out.println("\t quit - Exits Program");
-        System.out.println("\t random - Arbitrarily choose a restaurant for you");
         System.out.println("<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>");
     }
 
@@ -114,6 +136,8 @@ public class WhereToEat {
             doAdd();
         } else if (userInput.equals("random")) {
             doRandom();
+        } else if (userInput.equals("sort")) {
+            doSort();
         } else {
             System.out.println("No function is associated with this input.");
         }
@@ -147,13 +171,14 @@ public class WhereToEat {
     // EFFECTS: lists out all restaurants
     private void doList() {
         System.out.println("\n List size: " + database.getProcessedDataBase().size());
-        System.out.println("\n Index | Name | Genre | Rating | City | Distance");
+        System.out.println("\n Index | Name | Genre | Rating | City | Distance | Average Price");
         for (Restaurant r: database.getProcessedDataBase()) {
             double distance = r.getDistance(currLocation);
             int indexPos = database.getProcessedDataBase().indexOf(r);
+            double avgPrice = r.getAvgPrice();
             String city = r.getLocation().getCityName();
             System.out.println(indexPos + " | " + r.getName() + " | " + r.getGenre() + " | " + r.getRating() + " | "
-                    + city + " | " + numberFormat.format(distance) + "km");
+                    + city + " | " + numberFormat.format(distance) + "km" + "\n Average Price: $" + avgPrice);
         }
         System.out.println("\n Enter Anything in the console to return to menu");
         input.nextLine();
@@ -254,7 +279,7 @@ public class WhereToEat {
     private void doRandom() {
         Restaurant random;
         String preference;
-        System.out.println("\n Randomized from filtered? y/n");
+        System.out.println("\n Randomized from processed? y/n");
         preference = input.nextLine();
         if (preference.equals("y")) {
             random = database.randomRestaurant(database.getProcessedDataBase());
@@ -276,4 +301,29 @@ public class WhereToEat {
         }
     }
 
+    // EFFECTS: sorts the database by a user input specified field from Restaurant
+    private void doSort() {
+        String sortBy = "";
+        while (!(sortBy.equals("name") || sortBy.equals("rating") || sortBy.equals("price"))) {
+            System.out.println("Sort Options:");
+            System.out.println("\t - Name");
+            System.out.println("\t - Rating");
+            System.out.println("\t - Price");
+            sortBy = input.nextLine();
+            sortBy.toLowerCase();
+        }
+        String order = "";
+        while (! (order.equals("a") || order.equals("d")) ) {
+            System.out.println("Sort Options:");
+            System.out.println("\t a - ascending");
+            System.out.println("\t d - descending");
+            order = input.nextLine();
+            order.toLowerCase();
+        }
+        if (order.equals("a")) {
+            database.sortDatabaseAscending(sortBy);
+        } else {
+            database.sortDatabaseDescending(sortBy);
+        }
+    }
 }

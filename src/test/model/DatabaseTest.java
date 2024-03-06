@@ -16,13 +16,29 @@ public class DatabaseTest {
     private int rating;
     private Location location3;
 
+    private MenuItem food1;
+    private MenuItem food2;
+    private MenuItem food3;
+    private MenuItem food4;
+
     @BeforeEach
     void setup() {
         testData = new Database();
         location1 = new Location("Burnaby", 100,100);
-        restTest1 = new Restaurant("Pizza", "Italian", 5, location1);
+        restTest1 = new Restaurant("Pizza", "Italian", 8, location1);
         location2 = new Location("Langley", 100, 50);
-        restTest2 = new Restaurant("Stirfry", "Asian", 8, location2);
+        restTest2 = new Restaurant("Stirfry", "Asian", 5, location2);
+
+        food1 = new MenuItem("Hawaii", 50);
+        food2 = new MenuItem("Cheese", 60);
+        food3 = new MenuItem("Chicken", 10);
+        food4 = new MenuItem("Beef", 20);
+
+        restTest1.addToMenu(food1);
+        restTest1.addToMenu(food2);
+        restTest2.addToMenu(food3);
+        restTest2.addToMenu(food4);
+
 
         name = "BBQ";
         genre = "American";
@@ -98,5 +114,44 @@ public class DatabaseTest {
         assertTrue(testData.getDataBase().contains(testData.randomRestaurant(testData.getDataBase())));
         assertTrue(testData.getDataBase().contains(testData.randomRestaurant(testData.getProcessedDataBase())));
     }
+
+    @Test
+    void testSortDatabaseAscending() {
+        testData.addRestaurant(restTest1);
+        testData.addRestaurant(restTest2);
+        testData.resetProcessedDataBase();
+
+        testData.sortDatabaseAscending("rating");
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseAscending("name");
+        assertEquals(restTest1, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseAscending("price");
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+    }
+
+    @Test
+    void testSortDatabaseDescending() {
+        testData.addRestaurant(restTest2);
+        testData.addRestaurant(restTest1);
+        testData.resetProcessedDataBase();
+
+        testData.sortDatabaseDescending("rating");
+        assertEquals(restTest1, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseDescending("name");
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseDescending("price");
+        assertEquals(restTest1, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+    }
+
 
 }

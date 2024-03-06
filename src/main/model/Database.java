@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -68,18 +70,33 @@ public class Database {
         return (Restaurant) dataBase.get(randomPos);
     }
 
-    //REQUIRES: nothing
+    //REQUIRES: string must match one of the comparable fields of restaurant
     //MODIFIES: this
-    //EFFECTS: sorts the list by specified information
-    public void sortDatabase(String sortByThis) {
-
+    //EFFECTS: sorts the list by specified information in ascending order
+    public void sortDatabaseAscending(String sortBy) {
+        if (sortBy.toLowerCase().equals("name")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getName));
+        } else if (sortBy.toLowerCase().equals("rating")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getRating));
+        } else if (sortBy.toLowerCase().equals("price")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
+        }
     }
 
-    //REQUIRES: nothing
+    //REQUIRES: string must match one of the comparable fields of restaurant
     //MODIFIES: this
-    //EFFECTS: filters the list by specified information
-    public void filterDatabase(String category, String specific) {
-
+    //EFFECTS: sorts the list by specified information
+    public void sortDatabaseDescending(String sortBy) {
+        if (sortBy.toLowerCase().equals("name")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getName));
+            Collections.reverse(processedDataBase);
+        } else if (sortBy.toLowerCase().equals("rating")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getRating));
+            Collections.reverse(processedDataBase);
+        } else if (sortBy.toLowerCase().equals("price")) {
+            Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
+            Collections.reverse(processedDataBase);
+        }
     }
 
 
