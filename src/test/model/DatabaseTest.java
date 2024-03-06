@@ -144,6 +144,14 @@ public class DatabaseTest {
         testData.sortDatabaseAscending("other");
         assertEquals(restTest2, testData.getProcessedDataBase().get(0));
         assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+
+        testData.resetProcessedDataBase();
+        assertEquals(restTest1, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseAscending("other");
+        assertEquals(restTest1, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest2, testData.getProcessedDataBase().get(1));
     }
 
     @Test
@@ -175,6 +183,16 @@ public class DatabaseTest {
         testData.sortDatabaseDescending("other");
         assertEquals(restTest1, testData.getProcessedDataBase().get(0));
         assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+
+        testData.resetProcessedDataBase();
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseDescending("other");
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
+
+
     }
 
 
