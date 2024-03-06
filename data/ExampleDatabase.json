@@ -29,7 +29,7 @@
             "cityName": "Metrotown",
             "coordY": 85
         },
-        "favourite": false,
+        "favourite": true,
         "menu": [
             {
                 "foodName": "tomato",
@@ -71,7 +71,7 @@
             "cityName": "Burnaby",
             "coordY": 25
         },
-        "favourite": false,
+        "favourite": true,
         "menu": [
             {
                 "foodName": "Beef shank",

@@ -58,6 +58,11 @@ public class JsonReaderTest {
             assertEquals(2, database.get(3).getMenu().size());
             assertEquals("Lamb", database.get(3).getMenu().get(1).getFoodName());
 
+            assertEquals(false, database.get(0).isFavourite());
+            assertEquals(true, database.get(1).isFavourite());
+            assertEquals(false, database.get(2).isFavourite());
+            assertEquals(true, database.get(3).isFavourite());
+
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
