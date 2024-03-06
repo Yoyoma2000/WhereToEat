@@ -4,20 +4,31 @@ import model.Restaurant;
 import model.Database;
 import model.Location;
 import model.MenuItem;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // This class is the UI that controls the restaurant and database classes
 public class WhereToEat {
+    private static final String JSON_STORE = "./data/database.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
     private Scanner input;
-    private Database database;
-    private Location currLocation;
     private DecimalFormat numberFormat;
+    private Location currLocation;
+
+    private Database database;
 
     // EFFECTS: runs the database application
     public WhereToEat() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         launchApp();
     }
 
@@ -37,6 +48,7 @@ public class WhereToEat {
             userInput = userInput.toLowerCase();
 
             if (userInput.equals("quit")) {
+                doSaveWarning();
                 continueApp = false;
             } else {
                 runInput(userInput);
@@ -63,7 +75,7 @@ public class WhereToEat {
         numberFormat = new DecimalFormat("#.00");
 
         //Adding a few example restaurants
-        loadExampleRestaurants();
+        //loadExampleRestaurants();
     }
 
     // Examples for the sake of presentation, will turn into load data function
@@ -119,6 +131,8 @@ public class WhereToEat {
         System.out.println("\t sort - sorts the database by a restaurant field");
         System.out.println("\t info - learn about a restaurant");
         System.out.println("\t add - add new restaurant");
+        System.out.println("\t save - save Database to file");
+        System.out.println("\t load - load Database from file");
         System.out.println("\t quit - Exits Program");
         System.out.println("<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>+<>");
     }
@@ -138,6 +152,10 @@ public class WhereToEat {
             doRandom();
         } else if (userInput.equals("sort")) {
             doSort();
+        } else if (userInput.equals("save")) {
+            saveDataBase();
+        } else if (userInput.equals("load")) {
+            loadDataBase();
         } else {
             System.out.println("No function is associated with this input.");
         }
@@ -326,4 +344,41 @@ public class WhereToEat {
             database.sortDatabaseDescending(sortBy);
         }
     }
+
+    // EFFECTS: saves the database to file
+    private void saveDataBase() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(database);
+            jsonWriter.close();
+            System.out.println("Saved Database to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads database from file
+    private void loadDataBase() {
+        try {
+            database = jsonReader.read();
+            System.out.println("Loaded database from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        database.resetProcessedDataBase();
+    }
+
+    // EFFECTS: asks user to save before quitting, save if user accepts
+    private void doSaveWarning() {
+        System.out.println("\n Save before closing? y/n");
+        String userInput = input.nextLine();
+        userInput.toLowerCase();
+
+        if (userInput.equals("y")) {
+            saveDataBase();
+        }
+
+    }
+
 }

@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
 // Ths class represents information about a restaurant
-public class Restaurant {
+public class Restaurant implements Writable {
     private String name;
     private String genre;
     private int rating;
@@ -113,5 +117,31 @@ public class Restaurant {
     @Override
     public String toString() {
         return "[name =" + name + ", ]";
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+
+        json.put("name", name);
+        json.put("genre", genre);
+        json.put("rating", rating);
+        json.put("favourite", favourite);
+        json.put("location", location.toJson());
+        json.put("menu", menuToJson());
+
+        return json;
+    }
+
+    // EFFECTS: returns MenuItems in this restaurant as a JSON array
+    private JSONArray menuToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (MenuItem i : menu) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 }

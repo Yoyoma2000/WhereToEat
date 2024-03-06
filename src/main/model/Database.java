@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +12,7 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 // This class stores a list of restaurants
-public class Database {
+public class Database implements Writable {
     private ArrayList<Restaurant> dataBase;
     private ArrayList<Restaurant> processedDataBase; //Database after sort and filter
 
@@ -99,5 +103,23 @@ public class Database {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        //json.put("name", name);
+        json.put("dataBase", dataBaseToJson());
+        return json;
+    }
 
+    // EFFECTS: returns restaraunts in this database as a JSON array
+    private JSONArray dataBaseToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Restaurant t : dataBase) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
 }

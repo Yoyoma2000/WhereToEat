@@ -1,0 +1,86 @@
+{"dataBase": [
+    {
+        "name": "Chipotle",
+        "genre": "Mexican",
+        "rating": 6,
+        "location": {
+            "coordX": 76,
+            "cityName": "Vancouver",
+            "coordY": 85
+        },
+        "favourite": false,
+        "menu": [
+            {
+                "foodName": "Bowl",
+                "price": 15
+            },
+            {
+                "foodName": "Taco",
+                "price": 10
+            }
+        ]
+    },
+    {
+        "name": "Lamb Hotpot",
+        "genre": "Chinese",
+        "rating": 8,
+        "location": {
+            "coordX": 20,
+            "cityName": "Metrotown",
+            "coordY": 85
+        },
+        "favourite": false,
+        "menu": [
+            {
+                "foodName": "tomato",
+                "price": 30
+            },
+            {
+                "foodName": "yinyang",
+                "price": 25
+            }
+        ]
+    },
+    {
+        "name": "Pho86",
+        "genre": "Vietnamese",
+        "rating": 10,
+        "location": {
+            "coordX": 50,
+            "cityName": "Surrey",
+            "coordY": 25
+        },
+        "favourite": false,
+        "menu": [
+            {
+                "foodName": "House Special",
+                "price": 12
+            },
+            {
+                "foodName": "Spicy",
+                "price": 18
+            }
+        ]
+    },
+    {
+        "name": "Lulu Kitchen",
+        "genre": "Chinese",
+        "rating": 9,
+        "location": {
+            "coordX": 25,
+            "cityName": "Burnaby",
+            "coordY": 25
+        },
+        "favourite": false,
+        "menu": [
+            {
+                "foodName": "Beef shank",
+                "price": 6.5
+            },
+            {
+                "foodName": "Lamb",
+                "price": 8.5
+            }
+        ]
+    }
+]}

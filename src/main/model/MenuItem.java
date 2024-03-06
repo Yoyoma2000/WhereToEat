@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.lang.Math;
 import static java.lang.Math.sqrt;
 
 // This class represents an individual dish that a restaurant has in its menu
-public class MenuItem {
+public class MenuItem implements Writable {
     private String foodName;
     private double price;
 
@@ -32,5 +35,16 @@ public class MenuItem {
     @Override
     public String toString() {
         return "Dish Name = " + foodName + " | Price ($): " + price;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+
+        json.put("foodName", foodName);
+        json.put("price", price);
+
+        return json;
     }
 }

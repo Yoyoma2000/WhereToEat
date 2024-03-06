@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // This class represents the location name and coordinate (not actual) of a restaurant
-public class Location {
+public class Location implements Writable {
     private String cityName;
     private double coordX;
     private double coordY;
@@ -34,5 +37,17 @@ public class Location {
 
     public void setY(double y) {
         this.coordY = y;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+
+        json.put("cityName", cityName);
+        json.put("coordX", coordX);
+        json.put("coordY", coordY);
+
+        return json;
     }
 }
