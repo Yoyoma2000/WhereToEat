@@ -78,14 +78,12 @@ public class Database implements Writable {
     //MODIFIES: this
     //EFFECTS: sorts the list by specified information in ascending order
     public void sortDatabaseAscending(String sortBy) {
-        if (sortBy.toLowerCase().equals("name")) {
+        if (sortBy.equals("name")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getName));
-        } else if (sortBy.toLowerCase().equals("rating")) {
+        } else if (sortBy.equals("rating")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getRating));
-        } else if (sortBy.toLowerCase().equals("price")) {
+        } else if (sortBy.equals("price")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
-        } else {
-            resetProcessedDataBase();
         }
     }
 
@@ -93,17 +91,15 @@ public class Database implements Writable {
     //MODIFIES: this
     //EFFECTS: sorts the list by specified information
     public void sortDatabaseDescending(String sortBy) {
-        if (sortBy.toLowerCase().equals("name")) {
+        if (sortBy.equals("name")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getName));
             Collections.reverse(processedDataBase);
-        } else if (sortBy.toLowerCase().equals("rating")) {
+        } else if (sortBy.equals("rating")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getRating));
             Collections.reverse(processedDataBase);
-        } else if (sortBy.toLowerCase().equals("price")) {
+        } else if (sortBy.equals("price")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
             Collections.reverse(processedDataBase);
-        } else {
-            resetProcessedDataBase();
         }
     }
 

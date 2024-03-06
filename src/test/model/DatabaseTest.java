@@ -129,17 +129,17 @@ public class DatabaseTest {
         assertEquals(restTest1, testData.getProcessedDataBase().get(0));
         assertEquals(restTest2, testData.getProcessedDataBase().get(1));
 
-        testData.sortDatabaseAscending("PRice");
-        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
-        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
-
         testData.sortDatabaseAscending("price");
         assertEquals(restTest2, testData.getProcessedDataBase().get(0));
         assertEquals(restTest1, testData.getProcessedDataBase().get(1));
 
-        testData.sortDatabaseAscending("reset");
+        testData.resetProcessedDataBase();
         assertEquals(restTest1, testData.getProcessedDataBase().get(0));
         assertEquals(restTest2, testData.getProcessedDataBase().get(1));
+
+        testData.sortDatabaseAscending("price");
+        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
+        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
     }
 
     @Test
@@ -160,17 +160,13 @@ public class DatabaseTest {
         assertEquals(restTest1, testData.getProcessedDataBase().get(0));
         assertEquals(restTest2, testData.getProcessedDataBase().get(1));
 
-        testData.sortDatabaseAscending("PRICE");
+        testData.resetProcessedDataBase();
         assertEquals(restTest2, testData.getProcessedDataBase().get(0));
         assertEquals(restTest1, testData.getProcessedDataBase().get(1));
 
-        testData.sortDatabaseDescending("PricE");
+        testData.sortDatabaseDescending("price");
         assertEquals(restTest1, testData.getProcessedDataBase().get(0));
         assertEquals(restTest2, testData.getProcessedDataBase().get(1));
-
-        testData.sortDatabaseAscending("reset");
-        assertEquals(restTest2, testData.getProcessedDataBase().get(0));
-        assertEquals(restTest1, testData.getProcessedDataBase().get(1));
     }
 
 

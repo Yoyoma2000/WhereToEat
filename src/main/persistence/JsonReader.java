@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+// This class represents the projects save system/function, saving database (collection of restauarnts) to file
 public class JsonReader {
     private String source;
 
