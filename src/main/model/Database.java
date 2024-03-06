@@ -84,6 +84,8 @@ public class Database implements Writable {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getRating));
         } else if (sortBy.toLowerCase().equals("price")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
+        } else {
+            resetProcessedDataBase();
         }
     }
 
@@ -100,6 +102,8 @@ public class Database implements Writable {
         } else if (sortBy.toLowerCase().equals("price")) {
             Collections.sort(processedDataBase, Comparator.comparing(Restaurant::getAvgPrice));
             Collections.reverse(processedDataBase);
+        } else {
+            resetProcessedDataBase();
         }
     }
 
