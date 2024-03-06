@@ -313,7 +313,7 @@ public class WhereToEat {
             sortBy.toLowerCase();
         }
         String order = "";
-        while (! (order.equals("a") || order.equals("d")) ) {
+        while (!(order.equals("a") || order.equals("d"))) {
             System.out.println("Sort Options:");
             System.out.println("\t a - ascending");
             System.out.println("\t d - descending");
