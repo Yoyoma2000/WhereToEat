@@ -1,0 +1,29 @@
+{"dataBase": [
+    {
+        "name": "Lulu BBQ",
+        "genre": "Asian",
+        "rating": 8,
+        "location": {
+            "coordX": 0,
+            "cityName": "A",
+            "coordY": 0
+        },
+        "favourite": false,
+        "menu": []
+    },
+    {
+        "name": "McDonald",
+        "genre": "American",
+        "rating": 2,
+        "location": {
+            "coordX": 5,
+            "cityName": "B",
+            "coordY": 5
+        },
+        "favourite": false,
+        "menu": [{
+            "foodName": "Burger",
+            "price": 10
+        }]
+    }
+]}
