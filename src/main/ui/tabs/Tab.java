@@ -5,6 +5,7 @@ import ui.*;
 
 import java.awt.*;
 
+// Superclass for tabs GUI
 public abstract class Tab extends JPanel {
     private final WhereToEatUI mainHub;
 

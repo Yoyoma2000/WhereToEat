@@ -1,5 +1,6 @@
 package ui;
 
+// All buttons used in GUI
 public enum Buttons {
     SEARCH("search"),
     LIST("list"),
