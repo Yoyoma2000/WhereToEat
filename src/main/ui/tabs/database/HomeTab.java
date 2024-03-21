@@ -2,6 +2,7 @@ package ui.tabs.database;
 
 
 import model.Location;
+import model.Restaurant;
 import ui.Buttons;
 import ui.WhereToEatUI;
 import ui.tabs.Tab;
@@ -20,7 +21,7 @@ public class HomeTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Where To Eat?";
     private static final String SEARCH_BAR1 = "Enter index number"; //unused
-    private static final String SEARCH_BAR2 = "Enter restaurant name,city"; //unused
+    private static final String SEARCH_BAR2 = "Enter restaurant name-city"; //unused
     private static final String SEARCH = "Search"; //unused
     private static final String SEARCH_INDEX_RADIOBUTTON = "By Index"; //unused
     private static final String SEARCH_NAME_RADIOBUTTON = "By Name"; //unused
@@ -103,29 +104,37 @@ public class HomeTab extends Tab {
         searchButton.setSize(WIDTH, HEIGHT / 6);
         randomButton = new JButton(RANDOM_BUTTON);
         randomButton.setSize(WIDTH, HEIGHT / 6);
-
         JPanel buttonRow = formatButtonRow(searchButton);
         buttonRow.add(randomButton);
         buttonRow.setSize(WIDTH, HEIGHT / 6);
 
         searchButton.addActionListener(e -> {
-            int index;
-            if (!indexSearchMode) {
-                index = getHub().getDatabase().searchDatabase("placeholder","placeholder");
-            } else {
-                index = Integer.parseInt(searchBarField.getText());
-            }
-
-            searchRestaurant();//Put in randomIndex
+            doSearch();
         });
 
         randomButton.addActionListener(e -> {
             Random rand = new Random();
             int randomIndex = rand.nextInt(getHub().getDatabase().getProcessedDataBase().size());
-            searchRestaurant(); //Put in randomIndex
+            searchRestaurant(randomIndex);
         });
 
         this.add(buttonRow);
+    }
+
+    private void doSearch() {
+        int index;
+        if (!indexSearchMode) {
+            String searchInput = searchBarField.getText().toLowerCase();
+            String[] enteredValues = searchInput.split("-");
+            index = getHub().getDatabase().searchDatabase(enteredValues[0], enteredValues[1]);
+        } else {
+            index = Integer.parseInt(searchBarField.getText());
+        }
+        if (index == -1) {
+            searchBarField.setText("No Restaurant Found!");
+        } else {
+            searchRestaurant(index);
+        }
     }
 
     private void placeSearchCheckButtons() {
@@ -151,15 +160,17 @@ public class HomeTab extends Tab {
     }
 
     //ADD (int index) argument later
-    private void searchRestaurant() {
+    private void searchRestaurant(int index) {
+        Restaurant selectedRes = getHub().getDatabase().getDataBase().get(index);
+
         restaurantInfo = new JFrame("Restaurant Info");
         restaurantInfo.setSize(600, 400);
         JTabbedPane sidebar = new JTabbedPane();
         sidebar.setTabPlacement(JTabbedPane.TOP);
 
-        JPanel infoTab = new InfoTab(this.getHub());
-        JPanel menuTab = new MenuTab(this.getHub());
-        JPanel addFoodTab = new AddFoodTab(this.getHub());
+        JPanel infoTab = new InfoTab(this.getHub(), selectedRes);
+        JPanel menuTab = new MenuTab(this.getHub(), selectedRes);
+        JPanel addFoodTab = new AddFoodTab(this.getHub(), selectedRes);
 
         sidebar.add(infoTab, 0);
         sidebar.setTitleAt(0, "Info");

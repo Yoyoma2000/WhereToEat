@@ -1,5 +1,7 @@
 package ui.tabs.restaurant;
 
+import model.Restaurant;
+import model.MenuItem;
 import ui.WhereToEatUI;
 
 import ui.tabs.Tab;
@@ -21,11 +23,14 @@ public class AddFoodTab extends Tab {
     private JTextField dishNameText;
     private JTextField dishPriceText;
 
-    public AddFoodTab(WhereToEatUI hub) {
+    // Tab Specific fields
+    Restaurant selectedRes;
+
+    public AddFoodTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
         setLayout(new GridLayout(6, 1));
-
         placeTitle();
+        this.selectedRes = res;
 
         placeDishFields();
         placeAddButton();
@@ -41,6 +46,14 @@ public class AddFoodTab extends Tab {
         addButton = new JButton(ADD_FOOD_BUTTON);
         addButton.setSize(WIDTH, HEIGHT / 6);
         this.add(addButton);
+
+        addButton.addActionListener(e -> {
+            String name = dishNameText.getText();
+            double price = Double.parseDouble(dishPriceText.getText());
+
+            MenuItem newDish = new MenuItem(name, price);
+            selectedRes.addToMenu(newDish);
+        });
     }
 
     private void placeDishFields() {
