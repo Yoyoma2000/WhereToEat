@@ -26,12 +26,17 @@ public class AddFoodTab extends Tab {
     // Tab Specific fields
     Restaurant selectedRes;
 
+    private GridBagConstraints grid;
+
     public AddFoodTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
-        setLayout(new GridLayout(6, 1));
-        placeTitle();
+        setLayout(new GridBagLayout());
+        grid = new GridBagConstraints();
+        grid.fill = GridBagConstraints.HORIZONTAL;
+
         this.selectedRes = res;
 
+        placeTitle();
         placeDishFields();
         placeAddButton();
     }
@@ -39,13 +44,19 @@ public class AddFoodTab extends Tab {
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
-        this.add(text);
+        grid.gridx = 1;
+        grid.gridy = 0;
+        grid.gridwidth = 2;
+        this.add(text, grid);
     }
 
     private void placeAddButton() {
         addButton = new JButton(ADD_FOOD_BUTTON);
         addButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(addButton);
+        grid.gridx = 1;
+        grid.gridy = 4;
+        grid.gridwidth = 2;
+        this.add(addButton, grid);
 
         addButton.addActionListener(e -> {
             String name = dishNameText.getText();
@@ -59,11 +70,17 @@ public class AddFoodTab extends Tab {
     private void placeDishFields() {
         dishNameText = new JTextField(DISH_NAME_FIELD);
         dishNameText.setSize(WIDTH, HEIGHT / 6);
-        this.add(dishNameText);
+        grid.gridx = 1;
+        grid.gridy = 2;
+        grid.gridwidth = 2;
+        this.add(dishNameText, grid);
 
         dishPriceText = new JTextField(DISH_PRICE_FIELD);
         dishPriceText.setSize(WIDTH, HEIGHT / 6);
-        this.add(dishPriceText);
+        grid.gridx = 1;
+        grid.gridy = 3;
+        grid.gridwidth = 2;
+        this.add(dishPriceText, grid);
     }
 
 }

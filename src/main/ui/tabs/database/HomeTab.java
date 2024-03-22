@@ -3,17 +3,18 @@ package ui.tabs.database;
 
 import model.Location;
 import model.Restaurant;
-import ui.Buttons;
 import ui.WhereToEatUI;
 import ui.tabs.Tab;
 import ui.tabs.restaurant.AddFoodTab;
 import ui.tabs.restaurant.InfoTab;
 import ui.tabs.restaurant.MenuTab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 
 // Home tab with title and search function
@@ -25,7 +26,7 @@ public class HomeTab extends Tab {
     private static final String SEARCH = "Search"; //unused
     private static final String SEARCH_INDEX_RADIOBUTTON = "By Index"; //unused
     private static final String SEARCH_NAME_RADIOBUTTON = "By Name"; //unused
-    private static final String RANDOM_BUTTON = "I'm Feeling Lucky!"; //unused
+    private static final String RANDOM_BUTTON = "Random"; //unused
 
     private static final String CURR_CITY = "Current City"; //unused
     private static final String CURR_X = "Current X"; //unused
@@ -48,65 +49,123 @@ public class HomeTab extends Tab {
     private JFrame restaurantInfo;
 
     // Tab specific values:
+    private GridBagConstraints grid;
     boolean indexSearchMode = true;
+
+    private BufferedImage background;
+
+
+
 
     public HomeTab(WhereToEatUI hub) {
         super(hub);
-        setLayout(new GridLayout(6, 1));
+        setLayout(new GridBagLayout());
+        grid = new GridBagConstraints();
+        //grid.anchor = GridBagConstraints.CENTER;
+        grid.fill = GridBagConstraints.HORIZONTAL;
+        //grid.weightx = 1;
+        //grid.weighty = 1;
 
         placeTitle();
         placeSearchBar();
         placeButtons();
         placeSearchCheckButtons();
 
-        placeCurrLocation();
+        placeCurrLocationButton();
+        placeCurrLocationFields();
+        try {
+            setBackgroundImage();
+        } catch (IOException e) {
+            // Do nothing
+        }
     }
 
-    private void placeCurrLocation() {
-        cityField = new JTextField(CURR_CITY);
-        cityField.setSize(WIDTH, HEIGHT / 6);
-        this.add(cityField);
-        currXField = new JTextField(CURR_X);
-        currXField.setSize(WIDTH, HEIGHT / 6);
-        this.add(currXField);
-        currYField = new JTextField(CURR_Y);
-        currYField.setSize(WIDTH, HEIGHT / 6);
-        this.add(currYField);
 
-        currButton = new JButton(CURR_BUTTON);
-        currButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(currButton);
+    private void setBackgroundImage() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://www.mqtuu.org/wp-content/uploads/2018/10/cornucopia-banner-e1353008079917.jpg"));
+        Image scaledPicture = myPicture.getScaledInstance(500, 160, Image.SCALE_SMOOTH); //700,300
+        JLabel picLabel = new JLabel(new ImageIcon(scaledPicture));
+        grid.gridx = 0;
+        grid.gridy = 0;
+        grid.gridwidth = 10;
+        grid.gridheight = 10;
+        add(picLabel, grid);
+        grid.gridwidth = 1;
+        grid.gridheight = 1;
 
-        currButton.addActionListener(e -> {
-            String cityName = cityField.getText();
-            Double currX = Double.parseDouble(currXField.getText());
-            Double currY = Double.parseDouble(currYField.getText());
-
-            Location currLocation = new Location(cityName, currX, currY);
-            this.getHub().setCurrLocation(currLocation);
-        });
     }
 
     private void placeTitle() {
         title = new JLabel(INIT_TITLE, JLabel.CENTER);
         title.setSize(WIDTH, HEIGHT / 6);
-        this.add(title);
+
+        grid.gridx = 1;
+        grid.gridy = 0;
+        grid.gridwidth = 1;
+
+        this.add(title, grid);
+    }
+
+    private void placeCurrLocationFields() {
+        cityField = new JTextField(CURR_CITY);
+        cityField.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 1;
+        grid.gridy = 3;
+        grid.gridwidth = 2;
+        this.add(cityField, grid);
+        currXField = new JTextField(CURR_X);
+        currXField.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 3;
+        grid.gridy = 3;
+        grid.gridwidth = 1;
+        this.add(currXField, grid);
+        currYField = new JTextField(CURR_Y);
+        currYField.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 4;
+        grid.gridy = 3;
+        grid.gridwidth = 1;
+        this.add(currYField, grid);
+    }
+
+    private void placeCurrLocationButton() {
+        currButton = new JButton(CURR_BUTTON);
+        currButton.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 5;
+        grid.gridy = 3;
+        grid.gridwidth = 1;
+        this.add(currButton, grid);
+        currButton.addActionListener(e -> {
+            String cityName = cityField.getText();
+            Double currX = Double.parseDouble(currXField.getText());
+            Double currY = Double.parseDouble(currYField.getText());
+            Location currLocation = new Location(cityName, currX, currY);
+            this.getHub().setCurrLocation(currLocation);
+        });
     }
 
     private void placeSearchBar() {
         searchBarField = new JTextField(SEARCH_BAR1);
-        searchBarField.setSize(WIDTH, HEIGHT / 6);
-        this.add(searchBarField);
+        searchBarField.setSize(WIDTH * 2, HEIGHT / 6);
+
+        grid.gridx = 1;
+        grid.gridy = 1;
+        grid.gridwidth = 3;
+        this.add(searchBarField, grid);
     }
 
     private void placeButtons() {
         searchButton = new JButton(SEARCH);
         searchButton.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 4;
+        grid.gridy = 1;
+        grid.gridwidth = 1;
+        this.add(searchButton, grid);
         randomButton = new JButton(RANDOM_BUTTON);
         randomButton.setSize(WIDTH, HEIGHT / 6);
-        JPanel buttonRow = formatButtonRow(searchButton);
-        buttonRow.add(randomButton);
-        buttonRow.setSize(WIDTH, HEIGHT / 6);
+        grid.gridx = 5;
+        grid.gridy = 1;
+        grid.gridwidth = 1;
+        this.add(randomButton, grid);
 
         searchButton.addActionListener(e -> {
             doSearch();
@@ -117,8 +176,6 @@ public class HomeTab extends Tab {
             int randomIndex = rand.nextInt(getHub().getDatabase().getProcessedDataBase().size());
             searchRestaurant(randomIndex);
         });
-
-        this.add(buttonRow);
     }
 
     private void doSearch() {
@@ -140,18 +197,22 @@ public class HomeTab extends Tab {
     private void placeSearchCheckButtons() {
         searchByIndexButton = new JRadioButton(SEARCH_INDEX_RADIOBUTTON);
         searchByIndexButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(searchByIndexButton);
-
+        searchByIndexButton.setForeground(new Color(110, 227, 77, 255));
+        grid.gridx = 2;
+        grid.gridy = 2;
+        grid.gridwidth = 1;
+        this.add(searchByIndexButton, grid);
         searchByNameButton = new JRadioButton(SEARCH_NAME_RADIOBUTTON);
         searchByNameButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(searchByNameButton);
-
+        searchByNameButton.setForeground(new Color(103, 215, 72, 255));
+        grid.gridx = 3;
+        grid.gridy = 2;
+        this.add(searchByNameButton, grid);
         searchByIndexButton.addActionListener(e -> {
             searchByNameButton.setSelected(false);
             searchBarField.setText(SEARCH_BAR1);
             indexSearchMode = true;
         });
-
         searchByNameButton.addActionListener(e -> {
             searchByIndexButton.setSelected(false);
             searchBarField.setText(SEARCH_BAR2);

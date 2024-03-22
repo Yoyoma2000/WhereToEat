@@ -30,10 +30,13 @@ public class MenuTab extends Tab {
 
     // Tab Specific fields
     Restaurant selectedRes;
+    private GridBagConstraints grid;
 
     public MenuTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
-        setLayout(new GridLayout(3, 1));
+        setLayout(new GridBagLayout());
+        grid = new GridBagConstraints();
+        grid.fill = GridBagConstraints.HORIZONTAL;
         this.selectedRes = res;
 
         placeTitle();
@@ -45,7 +48,9 @@ public class MenuTab extends Tab {
     private void placeRefreshButton() {
         refreshButton = new JButton(REFRESH_BUTTON);
         refreshButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(refreshButton);
+        grid.gridx = 5;
+        grid.gridy = 1;
+        this.add(refreshButton, grid);
 
         refreshButton.addActionListener(e -> {
             this.remove(listPane);
@@ -65,13 +70,21 @@ public class MenuTab extends Tab {
 
         listPane = new JScrollPane(resList);
         listPane.setSize(WIDTH, HEIGHT / 2);
-        this.add(listPane);
+        grid.gridx = 2;
+        grid.gridy = 1;
+        grid.gridwidth = 3;
+        grid.gridheight = 5;
+        this.add(listPane, grid);
+        grid.gridwidth = 1;
+        grid.gridheight = 1;
     }
 
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
-        this.add(text);
+        grid.gridx = 2;
+        grid.gridy = 0;
+        this.add(text, grid);
     }
 
 

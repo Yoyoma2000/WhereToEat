@@ -1,5 +1,6 @@
 package ui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.*;
 import persistence.JsonReader;
@@ -9,8 +10,12 @@ import ui.tabs.database.FileTab;
 import ui.tabs.database.HomeTab;
 import ui.tabs.database.ListTab;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 // GUI for WhereToEat
 public class WhereToEatUI extends JFrame {
@@ -36,6 +41,7 @@ public class WhereToEatUI extends JFrame {
         super("Where To Eat?");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setLayout(new BorderLayout());
 
         initializeDatabase();
 
@@ -44,7 +50,7 @@ public class WhereToEatUI extends JFrame {
 
         loadTabs();
         add(sidebar);
-
+        setBackground(Color.GREEN);
         setVisible(true);
     }
 

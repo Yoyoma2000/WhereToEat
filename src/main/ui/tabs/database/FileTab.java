@@ -28,13 +28,14 @@ public class FileTab extends Tab {
     //private JSlider slider;
     //private JRadioButton checkButton;
 
+
     public FileTab(WhereToEatUI hub) {
         super(hub);
         setLayout(new GridLayout(3, 1));
 
         placeTitle();
         placeFileButtons();
-        placeSaveWarningCheckBox();
+        //placeSaveWarningCheckBox();
     }
 
     private void placeTitle() {

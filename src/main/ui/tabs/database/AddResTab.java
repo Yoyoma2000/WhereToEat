@@ -34,27 +34,38 @@ public class AddResTab extends Tab {
     private JTextField resXText;
     private JTextField resYText;
 
+    // Tab specific:
+    private GridBagConstraints grid;
+
     public AddResTab(WhereToEatUI hub) {
         super(hub);
-        setLayout(new GridLayout(6, 1));
+        setLayout(new GridBagLayout());
+        grid = new GridBagConstraints();
+        grid.fill = GridBagConstraints.HORIZONTAL;
 
         placeTitle();
 
-        placeRestaruantFields();
-
+        placeRestaruantFieldsRow1();
+        placeRestaruantFieldsRow2();
         placeAddButton();
     }
 
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
-        this.add(text);
+        grid.gridx = 3;
+        grid.gridy = 0;
+        grid.gridwidth = 2;
+        this.add(text, grid);
     }
 
     private void placeAddButton() {
         addButton = new JButton(ADD_RES_BUTTON);
         addButton.setSize(WIDTH, HEIGHT / 6);
-        this.add(addButton);
+        grid.gridx = 4;
+        grid.gridy = 3;
+        grid.gridwidth = 2;
+        this.add(addButton, grid);
 
         addButton.addActionListener(e -> {
             String resName = resNameText.getText();
@@ -71,30 +82,51 @@ public class AddResTab extends Tab {
         });
     }
 
-    private void placeRestaruantFields() {
+    private void placeRestaruantFieldsRow1() {
         resNameText = new JTextField(RES_NAME_FIELD);
         resNameText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resNameText);
+        grid.gridx = 1;
+        grid.gridy = 1;
+        grid.gridwidth = 2;
+        this.add(resNameText, grid);
 
         resGenreText = new JTextField(RES_GENRE_FIELD);
         resGenreText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resGenreText);
+        grid.gridx = 3;
+        grid.gridy = 1;
+        grid.gridwidth = 2;
+        this.add(resGenreText, grid);
 
         resRatingText = new JTextField(RES_RATING_FIELD);
         resRatingText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resRatingText);
+        grid.gridx = 5;
+        grid.gridy = 1;
+        grid.gridwidth = 2;
+        this.add(resRatingText, grid);
+    }
+
+    private void placeRestaruantFieldsRow2() {
 
         resCityText = new JTextField(RES_CITY_FIELD);
         resCityText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resCityText);
+        grid.gridx = 1;
+        grid.gridy = 2;
+        grid.gridwidth = 2;
+        this.add(resCityText, grid);
 
         resXText = new JTextField(RES_X_FIELD);
         resXText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resXText);
+        grid.gridx = 3;
+        grid.gridy = 2;
+        grid.gridwidth = 2;
+        this.add(resXText, grid);
 
         resYText = new JTextField(RES_Y_FIELD);
         resYText.setSize(WIDTH, HEIGHT / 6);
-        this.add(resYText);
+        grid.gridx = 5;
+        grid.gridy = 2;
+        grid.gridwidth = 2;
+        this.add(resYText, grid);
     }
 
 }
