@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-
+// The tab to add new dish to restaraunt in restaruant-info window.
 public class AddFoodTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Add Dish";
@@ -30,6 +30,7 @@ public class AddFoodTab extends Tab {
     // Tab Specific fields
     Restaurant selectedRes;
     private GridBagConstraints grid;
+
 
     public AddFoodTab(WhereToEatUI hub, Restaurant res) {
         super(hub);

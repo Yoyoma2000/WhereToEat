@@ -15,7 +15,6 @@ import java.net.URL;
 
 // Tab for adding new restaurants
 public class AddResTab extends Tab {
-
     // Texts used
     private static final String INIT_TITLE = "Add Restaurant";
     //private static final String ADD_RES_BUTTON = "Add"; //unused

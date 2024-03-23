@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
+// The main info tab for restaraunt in restaruant-info window
 public class InfoTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Restaurant Information:";

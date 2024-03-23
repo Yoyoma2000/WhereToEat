@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
+// The menu tab with list of foods sold from restaurant in restaruant-info window
 public class MenuTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Menu";
