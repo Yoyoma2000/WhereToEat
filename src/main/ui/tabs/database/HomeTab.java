@@ -52,6 +52,9 @@ public class HomeTab extends Tab {
     private GridBagConstraints grid;
     boolean indexSearchMode = true;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: creates new HomeTab in GUI window and adds all GUI elements
     public HomeTab(WhereToEatUI hub) {
         super(hub);
         setBackground(Color.WHITE);
@@ -73,7 +76,9 @@ public class HomeTab extends Tab {
         }
     }
 
-
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds background element to tab
     private void setBackgroundImage() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://www.mqtuu.org/wp-content/uploads/2018/10/cornucopia-banner-e1353008079917.jpg"));
         Image scaledPicture = myPicture.getScaledInstance(460, 160, Image.SCALE_SMOOTH); //700,300
@@ -87,6 +92,9 @@ public class HomeTab extends Tab {
         grid.gridheight = 1;
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         title = new JLabel(INIT_TITLE, JLabel.CENTER);
         title.setSize(WIDTH, HEIGHT / 6);
@@ -98,6 +106,9 @@ public class HomeTab extends Tab {
         this.add(title, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds location fields element for user input to tab
     private void placeCurrLocationFields() {
         cityField = new JTextField(CURR_CITY);
         cityField.setSize(WIDTH, HEIGHT / 6);
@@ -119,6 +130,9 @@ public class HomeTab extends Tab {
         this.add(currYField, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds location add element for user input to tab
     private void placeCurrLocationButton() {
         currButton = new JButton(CURR_BUTTON);
         currButton.setSize(WIDTH, HEIGHT / 6);
@@ -135,6 +149,9 @@ public class HomeTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds searchbar field element for user input to tab
     private void placeSearchBar() {
         searchBarField = new JTextField(SEARCH_BAR1);
         searchBarField.setSize(WIDTH * 2, HEIGHT / 6);
@@ -145,6 +162,9 @@ public class HomeTab extends Tab {
         this.add(searchBarField, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds search and random buttons element for user input to tab
     private void placeButtons() {
         searchButton = new JButton(SEARCH);
         searchButton.setSize(WIDTH, HEIGHT / 6);
@@ -170,6 +190,9 @@ public class HomeTab extends Tab {
         });
     }
 
+    //REQUIRES: database.size() > 0
+    //MODIFIES: this
+    //EFFECTS: uses search functions from Database class to retrieve a restaurant reference
     private void doSearch() {
         int index;
         if (!indexSearchMode) {
@@ -186,6 +209,9 @@ public class HomeTab extends Tab {
         }
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds search preference radiobuttons element for user input to tab
     private void placeSearchCheckButtons() {
         searchByIndexButton = new JRadioButton(SEARCH_INDEX_RADIOBUTTON);
         searchByIndexButton.setSize(WIDTH, HEIGHT / 6);
@@ -210,6 +236,9 @@ public class HomeTab extends Tab {
         });
     }
 
+    //REQUIRES: database.size() > index >= 0
+    //MODIFIES: this, Jframe
+    //EFFECTS: creates new window to display information of the restaurant corresponding to index input
     private void searchRestaurant(int index) {
         Restaurant selectedRes = getHub().getDatabase().getDataBase().get(index);
 

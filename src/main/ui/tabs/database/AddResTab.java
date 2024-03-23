@@ -38,6 +38,9 @@ public class AddResTab extends Tab {
     // Tab specific:
     private GridBagConstraints grid;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds add restaurnt tab to main GUI window, and relevant elements for tab
     public AddResTab(WhereToEatUI hub) {
         super(hub);
         setBackground(Color.WHITE);
@@ -56,6 +59,9 @@ public class AddResTab extends Tab {
         }
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
@@ -65,6 +71,9 @@ public class AddResTab extends Tab {
         this.add(text, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds add restaurant button element for user input to tab
     private void placeAddButton() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://cdn-icons-png.flaticon.com/512/3325/3325784.png"));
         Image scaledPicture = myPicture.getScaledInstance(50, 50, Image.SCALE_SMOOTH); //700,300
@@ -91,6 +100,9 @@ public class AddResTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds first row of restaurant info field element for user input to tab
     private void placeRestaruantFieldsRow1() {
         resNameText = new JTextField(RES_NAME_FIELD);
         resNameText.setSize(WIDTH, HEIGHT / 6);
@@ -114,8 +126,10 @@ public class AddResTab extends Tab {
         this.add(resRatingText, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS:  adds second row of restaurant info field element for user input to tab
     private void placeRestaruantFieldsRow2() {
-
         resCityText = new JTextField(RES_CITY_FIELD);
         resCityText.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 1;

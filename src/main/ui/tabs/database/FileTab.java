@@ -24,6 +24,9 @@ public class FileTab extends Tab {
     private JButton loadButton;
     private JCheckBox saveWarningCheckBox;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds File tab to the main GUI, adds relevant elements to the tab
     public FileTab(WhereToEatUI hub) {
         super(hub);
         setBackground(Color.WHITE);
@@ -38,12 +41,18 @@ public class FileTab extends Tab {
         //placeSaveWarningCheckBox();
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 3);
         this.add(text);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds save/load buttons element for userinput to tab
     private void placeFileButtons() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://w7.pngwing.com/pngs/563/899/png-transparent-computer-icons-favicon-save-icon-miscellaneous-text-rectangle.png"));
         Image scaledPicture = myPicture.getScaledInstance(70, 50, Image.SCALE_SMOOTH); //700,300
@@ -70,6 +79,9 @@ public class FileTab extends Tab {
         this.add(buttonRow);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds checkbox for savewarning element to tab
     private void placeSaveWarningCheckBox() {
         saveWarningCheckBox = new JCheckBox(SAVE_WARNING_CHECKBOX_CAPTION);
         saveWarningCheckBox.setSize(WIDTH, HEIGHT / 3);

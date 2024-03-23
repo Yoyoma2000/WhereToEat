@@ -31,6 +31,9 @@ public class InfoTab extends Tab {
     Restaurant selectedRes;
     private GridBagConstraints grid;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds info tab displaying restaurant info and relevant elements to restaurant info window
     public InfoTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
         setLayout(new GridBagLayout());
@@ -51,6 +54,9 @@ public class InfoTab extends Tab {
         }
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds refresh button element for user input to tab
     private void placeRefreshButton() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
         Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
@@ -69,6 +75,9 @@ public class InfoTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE);
         text.setSize(WIDTH, HEIGHT / 3);
@@ -77,6 +86,9 @@ public class InfoTab extends Tab {
         this.add(text, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds text element for displaying restaurant info to tab
     private void placeText() {
         double distance = selectedRes.getDistance(getHub().getCurrLocation());
         String city = selectedRes.getLocation().getCityName();
@@ -98,6 +110,9 @@ public class InfoTab extends Tab {
         this.add(new JLabel("\n Distance:" + distance), grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds text element for displaying restaurant avg price to tab
     private void placeAvgPrice() {
         double avgPrice = selectedRes.getAvgPrice();
         avgPriceText = new JLabel("\n Average Price: " + avgPrice);
@@ -106,6 +121,9 @@ public class InfoTab extends Tab {
         this.add(avgPriceText, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds text element for displaying restaurant favourite preference to tab
     private void placeFav() {
         favText = new JLabel("\n Favourite: " + selectedRes.isFavourite());
         grid.gridx = 1;
@@ -113,7 +131,9 @@ public class InfoTab extends Tab {
         this.add(favText, grid);
     }
 
-
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds favourite checkbox element for userinput tab
     private void placeFavCheckBox() {
         favCheckBox = new JCheckBox(FAV_CHECKBOX_CAPTION);
         favCheckBox.setSize(WIDTH, HEIGHT / 3);

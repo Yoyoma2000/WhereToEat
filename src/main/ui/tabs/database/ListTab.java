@@ -42,6 +42,9 @@ public class ListTab extends Tab {
     private DecimalFormat numberFormat = new DecimalFormat("#.00");
     private GridBagConstraints grid;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds tab for listing restaurants and necessary elements to main gui
     public ListTab(WhereToEatUI hub) {
         super(hub);
         setBackground(Color.WHITE);
@@ -61,6 +64,9 @@ public class ListTab extends Tab {
         placeList();
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds list element for user input to tab, displays all restaurants
     private void placeList() {
         DefaultListModel<String> stringList = new DefaultListModel<String>();
         stringList.addElement(LIST_COLUMN_NAMES);
@@ -87,6 +93,9 @@ public class ListTab extends Tab {
         grid.gridheight = 1;
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
@@ -96,6 +105,9 @@ public class ListTab extends Tab {
         this.add(text, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds sort preference comboboxes element for user input to tab
     private void placeSortOptions() {
         JLabel sortText = new JLabel(SORT_DROPDOWN);
         grid.gridx = 4;
@@ -113,6 +125,9 @@ public class ListTab extends Tab {
         this.add(sortComboBox, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds order preference comboboxes element for user input to tab
     private void placeOrderOptions() {
         JLabel orderText = new JLabel(ORDER_DROPDOWN);
         grid.gridx = 4;
@@ -129,6 +144,9 @@ public class ListTab extends Tab {
         this.add(orderComboBox, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds sort button element for user input to tab
     private void placeSortButton() {
         sortButton = new JButton(SORT_LIST_BUTTON);
         sortButton.setSize(WIDTH, HEIGHT / 6);
@@ -144,6 +162,9 @@ public class ListTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds reset button element for user input to tab
     private void placeResetButton() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
         Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
@@ -162,6 +183,9 @@ public class ListTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this, database
+    //EFFECTS: uses database sort functions, and applies sorting based on combobox inputs
     private void applySort() {
         String sortType = sortComboBox.getSelectedItem().toString().toLowerCase();
         String orderType = orderComboBox.getSelectedItem().toString();

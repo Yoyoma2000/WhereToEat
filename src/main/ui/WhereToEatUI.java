@@ -35,7 +35,9 @@ public class WhereToEatUI extends JFrame {
     private JsonReader jsonReader;
     private Location currLocation;
 
-
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: creates new window for GUI of the program
     public WhereToEatUI() {
         super("Where To Eat?");
         setSize(WIDTH, HEIGHT);
@@ -70,7 +72,9 @@ public class WhereToEatUI extends JFrame {
         currLocation = location;
     }
 
-    // ADD ALL DATA RELEATED THINGS HERE
+    //REQUIRES: nothing
+    //MODIFIES: this, database
+    //EFFECTS: ADD ALL DATA RELEATED THINGS HERE
     private void initializeDatabase() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -78,6 +82,9 @@ public class WhereToEatUI extends JFrame {
         database = new Database();
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this, HomeTab, ListTab, AddResTab, FileTab
+    //EFFECTS: adds the multiple tabs relevant to database GUI
     private void loadTabs() {
         JPanel homeTab = new HomeTab(this);
         JPanel listTab = new ListTab(this);
@@ -97,7 +104,7 @@ public class WhereToEatUI extends JFrame {
         sidebar.setTitleAt(File_TAB_INDEX, "File");
     }
 
-
+    // REQUIRES: nothing
     // EFFECTS: saves the database to file
     public void saveDataBase() {
         try {

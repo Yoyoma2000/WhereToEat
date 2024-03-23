@@ -28,6 +28,9 @@ public class MenuTab extends Tab {
     Restaurant selectedRes;
     private GridBagConstraints grid;
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds tab for listing menu items and relevant elements for the restaurant info window
     public MenuTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
         setLayout(new GridBagLayout());
@@ -45,6 +48,9 @@ public class MenuTab extends Tab {
 
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds refresh button element for user input to tab
     private void placeRefreshButton() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
         Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
@@ -61,6 +67,9 @@ public class MenuTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds list of menu items element to tab
     public void placeList() {
         DefaultListModel<String> stringList = new DefaultListModel<String>();
         stringList.addElement(LIST_COLUMN_NAMES);
@@ -82,6 +91,9 @@ public class MenuTab extends Tab {
         grid.gridheight = 1;
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);

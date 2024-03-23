@@ -31,7 +31,9 @@ public class AddFoodTab extends Tab {
     Restaurant selectedRes;
     private GridBagConstraints grid;
 
-
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds add food tab for adding new dishes to restaraunt in restaurant info window
     public AddFoodTab(WhereToEatUI hub, Restaurant res) {
         super(hub);
         setLayout(new GridBagLayout());
@@ -49,6 +51,9 @@ public class AddFoodTab extends Tab {
         }
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds title element to tab
     private void placeTitle() {
         text = new JLabel(INIT_TITLE, JLabel.CENTER);
         text.setSize(WIDTH, HEIGHT / 6);
@@ -58,6 +63,9 @@ public class AddFoodTab extends Tab {
         this.add(text, grid);
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds add-dish button element for user input tab
     private void placeAddButton() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://cdn4.iconfinder.com/data/icons/food-delivery-90/512/Food_order_eat-04-512.png"));
         Image scaledPicture = myPicture.getScaledInstance(70, 70, Image.SCALE_SMOOTH); //700,300
@@ -78,6 +86,9 @@ public class AddFoodTab extends Tab {
         });
     }
 
+    //REQUIRES: nothing
+    //MODIFIES: this
+    //EFFECTS: adds text-fields relevant to MenuItem for user input to tab
     private void placeDishFields() {
         dishNameText = new JTextField(DISH_NAME_FIELD);
         dishNameText.setSize(WIDTH, HEIGHT / 6);
