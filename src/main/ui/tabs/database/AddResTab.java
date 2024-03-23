@@ -3,26 +3,28 @@ package ui.tabs.database;
 import model.Location;
 import model.Restaurant;
 import ui.WhereToEatUI;
-import ui.Buttons;
 import ui.tabs.Tab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 
 // Tab for adding new restaurants
 public class AddResTab extends Tab {
+
     // Texts used
     private static final String INIT_TITLE = "Add Restaurant";
-    private static final String ADD_RES_BUTTON = "Add"; //unused
-    private static final String RES_NAME_FIELD = "Restaurant Name"; //unused
-    private static final String RES_GENRE_FIELD = "Genre"; //unused
-    private static final String RES_RATING_FIELD = "Rating (1-10)"; //unused
-    private static final String RES_CITY_FIELD = "City Name"; //unused
-    private static final String RES_X_FIELD = "X Coordinate"; //unused
-    private static final String RES_Y_FIELD = "Y Coordinate"; //unused
+    //private static final String ADD_RES_BUTTON = "Add"; //unused
+    private static final String RES_NAME_FIELD = "Restaurant Name";
+    private static final String RES_GENRE_FIELD = "Genre";
+    private static final String RES_RATING_FIELD = "Rating (1-10)";
+    private static final String RES_CITY_FIELD = "City Name";
+    private static final String RES_X_FIELD = "X Coordinate";
+    private static final String RES_Y_FIELD = "Y Coordinate";
 
     // Elements in UI
     private JLabel text;
@@ -39,6 +41,7 @@ public class AddResTab extends Tab {
 
     public AddResTab(WhereToEatUI hub) {
         super(hub);
+        setBackground(Color.WHITE);
         setLayout(new GridBagLayout());
         grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -47,7 +50,11 @@ public class AddResTab extends Tab {
 
         placeRestaruantFieldsRow1();
         placeRestaruantFieldsRow2();
-        placeAddButton();
+        try {
+            placeAddButton();
+        } catch (IOException e) {
+            //donothing
+        }
     }
 
     private void placeTitle() {
@@ -59,8 +66,11 @@ public class AddResTab extends Tab {
         this.add(text, grid);
     }
 
-    private void placeAddButton() {
-        addButton = new JButton(ADD_RES_BUTTON);
+    private void placeAddButton() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://cdn-icons-png.flaticon.com/512/3325/3325784.png"));
+        Image scaledPicture = myPicture.getScaledInstance(50, 50, Image.SCALE_SMOOTH); //700,300
+        Icon addIcon = new ImageIcon(scaledPicture);
+        addButton = new JButton(addIcon);
         addButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 4;
         grid.gridy = 3;

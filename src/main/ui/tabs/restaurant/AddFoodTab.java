@@ -6,16 +6,20 @@ import ui.WhereToEatUI;
 
 import ui.tabs.Tab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 
 public class AddFoodTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Add Dish";
-    private static final String ADD_FOOD_BUTTON = "Add"; //unused
-    private static final String DISH_NAME_FIELD = "Dish Name"; //unused
-    private static final String DISH_PRICE_FIELD = "Price"; //unused
+    //private static final String ADD_FOOD_BUTTON = "Add"; //unused
+    private static final String DISH_NAME_FIELD = "Dish Name";
+    private static final String DISH_PRICE_FIELD = "Price";
 
     // Elements in UI
     private JLabel text;
@@ -25,7 +29,6 @@ public class AddFoodTab extends Tab {
 
     // Tab Specific fields
     Restaurant selectedRes;
-
     private GridBagConstraints grid;
 
     public AddFoodTab(WhereToEatUI hub, Restaurant res) {
@@ -38,7 +41,11 @@ public class AddFoodTab extends Tab {
 
         placeTitle();
         placeDishFields();
-        placeAddButton();
+        try {
+            placeAddButton();
+        } catch (IOException e) {
+            //Do Nothing
+        }
     }
 
     private void placeTitle() {
@@ -50,8 +57,11 @@ public class AddFoodTab extends Tab {
         this.add(text, grid);
     }
 
-    private void placeAddButton() {
-        addButton = new JButton(ADD_FOOD_BUTTON);
+    private void placeAddButton() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://cdn4.iconfinder.com/data/icons/food-delivery-90/512/Food_order_eat-04-512.png"));
+        Image scaledPicture = myPicture.getScaledInstance(70, 70, Image.SCALE_SMOOTH); //700,300
+        Icon addIcon = new ImageIcon(scaledPicture);
+        addButton = new JButton(addIcon);
         addButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 1;
         grid.gridy = 4;

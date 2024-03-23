@@ -1,32 +1,27 @@
 package ui.tabs.restaurant;
 
-import model.Database;
 import model.MenuItem;
 import model.Restaurant;
-import ui.Buttons;
 import ui.WhereToEatUI;
 import ui.tabs.Tab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 public class MenuTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Menu";
     private static final String LIST_COLUMN_NAMES = "Dish | Price";
-    private static final String REFRESH_BUTTON = "Refresh";
-    private JButton refreshButton;
+    //private static final String REFRESH_BUTTON = "Refresh";
 
     // Elements in UI
     private JLabel text;
     private JScrollPane listPane;
-
-    //private JTextArea reportText;
-    //private JTextField textField;
-    //private JSlider slider;
-    //private JCheckBox checkBox;
+    private JButton refreshButton;
 
     // Tab Specific fields
     Restaurant selectedRes;
@@ -40,13 +35,20 @@ public class MenuTab extends Tab {
         this.selectedRes = res;
 
         placeTitle();
-        placeRefreshButton();
+        try {
+            placeRefreshButton();
+        } catch (IOException e) {
+            // Do nothing
+        }
         placeList();
 
     }
 
-    private void placeRefreshButton() {
-        refreshButton = new JButton(REFRESH_BUTTON);
+    private void placeRefreshButton() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
+        Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
+        Icon resetIcon = new ImageIcon(scaledPicture);
+        refreshButton = new JButton(resetIcon);
         refreshButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 5;
         grid.gridy = 1;

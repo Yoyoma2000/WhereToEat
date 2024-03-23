@@ -2,15 +2,15 @@ package ui.tabs.database;
 
 import model.Database;
 import model.Restaurant;
-import ui.Buttons;
 import ui.WhereToEatUI;
 import ui.tabs.Tab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.text.DecimalFormat;
 
 // Tab for listing restaurants in database
@@ -37,24 +37,14 @@ public class ListTab extends Tab {
     private JButton sortButton;
     private JComboBox<String> sortComboBox;
     private JComboBox<String> orderComboBox;
-    //private JRadioButton ascendingSortButton;
-    //private JRadioButton descendingSortButton;
-    //private JRadioButton nameSortButton;
-    //private JRadioButton priceSortButton;
-    //private JRadioButton ratingSortButton;
-
-    //private JTextArea reportText;
-    //private JTextField textField;
-    //private JSlider slider;
-    //private JCheckBox checkBox;
 
     // Tab specific fields:
     private DecimalFormat numberFormat = new DecimalFormat("#.00");
-
     private GridBagConstraints grid;
 
     public ListTab(WhereToEatUI hub) {
         super(hub);
+        setBackground(Color.WHITE);
         setLayout(new GridBagLayout());
         grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -62,13 +52,16 @@ public class ListTab extends Tab {
         placeTitle();
         placeSortOptions();
         placeOrderOptions();
-        placeButton();
+        placeSortButton();
+        try {
+            placeResetButton();
+        } catch (IOException e) {
+            //do nothing
+        }
         placeList();
-
     }
 
     private void placeList() {
-        //JLabel topText = new JLabel(LIST_COLUMN_NAMES);
         DefaultListModel<String> stringList = new DefaultListModel<String>();
         stringList.addElement(LIST_COLUMN_NAMES);
 
@@ -78,8 +71,7 @@ public class ListTab extends Tab {
             int indexPos = databaseRef.getProcessedDataBase().indexOf(r);
             double avgPrice = r.getAvgPrice();
             String city = r.getLocation().getCityName();
-            //JLabel resText = new JLabel(indexPos + " | " + r.getName() + " | " + r.getGenre() + " | "
-            //       + r.getRating() + " | " + city + " | " + numberFormat.format(distance) + "km | $" + avgPrice);
+
             stringList.addElement(indexPos + " | " + r.getName() + " | " + r.getGenre() + " | "
                     + r.getRating() + " | " + city + " | " + numberFormat.format(distance) + "km | $" + avgPrice);
         }
@@ -137,7 +129,7 @@ public class ListTab extends Tab {
         this.add(orderComboBox, grid);
     }
 
-    private void placeButton() {
+    private void placeSortButton() {
         sortButton = new JButton(SORT_LIST_BUTTON);
         sortButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 4;
@@ -145,7 +137,18 @@ public class ListTab extends Tab {
         grid.gridwidth = 1;
         this.add(sortButton, grid);
 
-        resetButton = new JButton(RESET_LIST_BUTTON);
+        sortButton.addActionListener(e -> {
+            applySort();
+            this.remove(listPane);
+            placeList();
+        });
+    }
+
+    private void placeResetButton() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
+        Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
+        Icon resetIcon = new ImageIcon(scaledPicture);
+        resetButton = new JButton(resetIcon); // used to be RESET_BUTTON_TEXT
         resetButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 5;
         grid.gridy = 5;
@@ -154,11 +157,6 @@ public class ListTab extends Tab {
 
         resetButton.addActionListener(e -> {
             getHub().getDatabase().resetProcessedDataBase();
-            this.remove(listPane);
-            placeList();
-        });
-        sortButton.addActionListener(e -> {
-            applySort();
             this.remove(listPane);
             placeList();
         });

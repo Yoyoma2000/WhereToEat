@@ -55,6 +55,6 @@ just want to see their options.
   add restaurant tab
 - You can generate the second required action related to the user story "adding multiple Xs to a Y" by 
   filling in the fields in add restaurant tab and pressing add.
-- You can locate my visual component by looking at home screen, buttons, and save
-- You can save the state of my application by going to file tab and pressing save
-- You can reload the state of my application by going to load tab and pressing load
+- You can locate my visual component by looking at home screen, buttons, and save/load
+- You can save the state of my application by going to file tab and pressing save icon
+- You can reload the state of my application by going to load tab and pressing load icon

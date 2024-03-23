@@ -3,20 +3,20 @@ package ui.tabs.restaurant;
 import model.Restaurant;
 import ui.WhereToEatUI;
 
-import ui.Buttons;
-import ui.WhereToEatUI;
 import ui.tabs.Tab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 public class InfoTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Restaurant Information:";
-    private static final String FAV_CHECKBOX_CAPTION = "Favourite"; //unused
-    private static final String REFRESH_BUTTON = "Refresh";
+    private static final String FAV_CHECKBOX_CAPTION = "Favourite";
+    //private static final String REFRESH_BUTTON = "Refresh";
 
 
     // Elements in UI
@@ -43,11 +43,18 @@ public class InfoTab extends Tab {
         placeAvgPrice();
         placeFav();
         placeFavCheckBox();
-        placeRefreshButton();
+        try {
+            placeRefreshButton();
+        } catch (IOException e) {
+            // Do nothing
+        }
     }
 
-    private void placeRefreshButton() {
-        refreshButton = new JButton(REFRESH_BUTTON);
+    private void placeRefreshButton() throws IOException {
+        BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
+        Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
+        Icon resetIcon = new ImageIcon(scaledPicture);
+        refreshButton = new JButton(resetIcon);
         refreshButton.setSize(WIDTH, HEIGHT / 6);
         grid.gridx = 3;
         grid.gridy = 3;
@@ -73,7 +80,6 @@ public class InfoTab extends Tab {
         double distance = selectedRes.getDistance(getHub().getCurrLocation());
         String city = selectedRes.getLocation().getCityName();
 
-        //text.setSize(WIDTH, HEIGHT / 3);
         grid.gridx = 1;
         grid.gridy = 1;
         this.add(new JLabel("\n Name: " + selectedRes.getName()), grid);

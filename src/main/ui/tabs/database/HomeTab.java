@@ -21,17 +21,17 @@ import java.util.Random;
 public class HomeTab extends Tab {
     // Texts used
     private static final String INIT_TITLE = "Where To Eat?";
-    private static final String SEARCH_BAR1 = "Enter index number"; //unused
-    private static final String SEARCH_BAR2 = "Enter restaurant name-city"; //unused
-    private static final String SEARCH = "Search"; //unused
-    private static final String SEARCH_INDEX_RADIOBUTTON = "By Index"; //unused
-    private static final String SEARCH_NAME_RADIOBUTTON = "By Name"; //unused
-    private static final String RANDOM_BUTTON = "Random"; //unused
+    private static final String SEARCH_BAR1 = "Enter index number";
+    private static final String SEARCH_BAR2 = "Enter restaurant name-city";
+    private static final String SEARCH = "Search";
+    private static final String SEARCH_INDEX_RADIOBUTTON = "By Index";
+    private static final String SEARCH_NAME_RADIOBUTTON = "By Name";
+    private static final String RANDOM_BUTTON = "Random";
 
-    private static final String CURR_CITY = "Current City"; //unused
-    private static final String CURR_X = "Current X"; //unused
-    private static final String CURR_Y = "Current Y"; //unused
-    private static final String CURR_BUTTON = "Submit"; //unused
+    private static final String CURR_CITY = "Current City";
+    private static final String CURR_X = "Current X";
+    private static final String CURR_Y = "Current Y";
+    private static final String CURR_BUTTON = "Submit";
 
     // Elements in UI
     private JLabel title;
@@ -52,19 +52,12 @@ public class HomeTab extends Tab {
     private GridBagConstraints grid;
     boolean indexSearchMode = true;
 
-    private BufferedImage background;
-
-
-
-
     public HomeTab(WhereToEatUI hub) {
         super(hub);
+        setBackground(Color.WHITE);
         setLayout(new GridBagLayout());
         grid = new GridBagConstraints();
-        //grid.anchor = GridBagConstraints.CENTER;
         grid.fill = GridBagConstraints.HORIZONTAL;
-        //grid.weightx = 1;
-        //grid.weighty = 1;
 
         placeTitle();
         placeSearchBar();
@@ -83,16 +76,15 @@ public class HomeTab extends Tab {
 
     private void setBackgroundImage() throws IOException {
         BufferedImage myPicture = ImageIO.read(new URL("https://www.mqtuu.org/wp-content/uploads/2018/10/cornucopia-banner-e1353008079917.jpg"));
-        Image scaledPicture = myPicture.getScaledInstance(500, 160, Image.SCALE_SMOOTH); //700,300
+        Image scaledPicture = myPicture.getScaledInstance(460, 160, Image.SCALE_SMOOTH); //700,300
         JLabel picLabel = new JLabel(new ImageIcon(scaledPicture));
         grid.gridx = 0;
-        grid.gridy = 0;
+        grid.gridy = 5;
         grid.gridwidth = 10;
         grid.gridheight = 10;
         add(picLabel, grid);
         grid.gridwidth = 1;
         grid.gridheight = 1;
-
     }
 
     private void placeTitle() {
@@ -197,14 +189,12 @@ public class HomeTab extends Tab {
     private void placeSearchCheckButtons() {
         searchByIndexButton = new JRadioButton(SEARCH_INDEX_RADIOBUTTON);
         searchByIndexButton.setSize(WIDTH, HEIGHT / 6);
-        searchByIndexButton.setForeground(new Color(110, 227, 77, 255));
         grid.gridx = 2;
         grid.gridy = 2;
         grid.gridwidth = 1;
         this.add(searchByIndexButton, grid);
         searchByNameButton = new JRadioButton(SEARCH_NAME_RADIOBUTTON);
         searchByNameButton.setSize(WIDTH, HEIGHT / 6);
-        searchByNameButton.setForeground(new Color(103, 215, 72, 255));
         grid.gridx = 3;
         grid.gridy = 2;
         this.add(searchByNameButton, grid);
@@ -220,7 +210,6 @@ public class HomeTab extends Tab {
         });
     }
 
-    //ADD (int index) argument later
     private void searchRestaurant(int index) {
         Restaurant selectedRes = getHub().getDatabase().getDataBase().get(index);
 
@@ -239,11 +228,10 @@ public class HomeTab extends Tab {
         sidebar.setTitleAt(1, "Menu");
         sidebar.add(addFoodTab, 2);
         sidebar.setTitleAt(2, "Add");
-
+        sidebar.setBackground(Color.BLUE);
         restaurantInfo.add(sidebar);
-
+        restaurantInfo.setBackground(Color.BLUE);
         restaurantInfo.setVisible(true);
-        //this.add(restaurantInfo);  This code is actually not needed, new window is already created
     }
 
 

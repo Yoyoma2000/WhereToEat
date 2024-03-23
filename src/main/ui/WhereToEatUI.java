@@ -32,6 +32,8 @@ public class WhereToEatUI extends JFrame {
 
     // Global variables:
     public static final String JSON_STORE = "./data/database.json";
+    public static final Location PLACEHOLDER_LOCATION = new Location("Somewhere", 0, 0);
+
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private Location currLocation;
@@ -47,6 +49,7 @@ public class WhereToEatUI extends JFrame {
 
         sidebar = new JTabbedPane();
         sidebar.setTabPlacement(JTabbedPane.TOP);
+        sidebar.setBackground(Color.GREEN);
 
         loadTabs();
         add(sidebar);
@@ -74,6 +77,7 @@ public class WhereToEatUI extends JFrame {
     private void initializeDatabase() {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        currLocation = PLACEHOLDER_LOCATION;
         database = new Database();
     }
 
