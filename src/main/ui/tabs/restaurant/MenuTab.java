@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -52,7 +53,7 @@ public class MenuTab extends Tab {
     //MODIFIES: this
     //EFFECTS: adds refresh button element for user input to tab
     private void placeRefreshButton() throws IOException {
-        BufferedImage myPicture = ImageIO.read(new URL("https://png2.cleanpng.com/sh/b10627083b0f8b9c64240aeadefd19a9/L0KzQYq4UcAzN6h5fZH9cnHxg8HokvVvfF53fdh7ZYPrPbrqjB4uPZVnfagBNHG8QIXpgscvPWg9UagAOEa0RYi5V8U6OWI5Tas6LoDxd1==/transparent-refresh-icon-5dbe664a904bb7.578965861572759114591.png"));
+        BufferedImage myPicture = ImageIO.read(new File("./data/0.png"));
         Image scaledPicture = myPicture.getScaledInstance(20, 20, Image.SCALE_SMOOTH); //700,300
         Icon resetIcon = new ImageIcon(scaledPicture);
         refreshButton = new JButton(resetIcon);
