@@ -28,7 +28,7 @@ public class AddFoodTab extends Tab {
     private JTextField dishPriceText;
 
     // Tab Specific fields
-    Restaurant selectedRes;
+    private Restaurant selectedRes;
     private GridBagConstraints grid;
 
     //REQUIRES: nothing

@@ -60,23 +60,32 @@ just want to see their options.
 - You can reload the state of my application by going to load tab and pressing load icon
 
 # Phase 4: Task 2
-Sat Mar 30 02:44:02 PDT 2024
+- Sat Mar 30 02:44:02 PDT 2024
 Added new restaurant: BBQ King
-Sat Mar 30 02:45:29 PDT 2024
+- Sat Mar 30 02:45:29 PDT 2024
 Added new restaurant: Pho You
-Sat Mar 30 02:45:33 PDT 2024
+- Sat Mar 30 02:45:33 PDT 2024
 Reset database to original state
-Sat Mar 30 02:45:46 PDT 2024
+- Sat Mar 30 02:45:46 PDT 2024
 Sorted database in descending order by: name
-Sat Mar 30 02:45:57 PDT 2024
+- Sat Mar 30 02:45:57 PDT 2024
 Sorted database in descending order by: rating
-Sat Mar 30 02:46:03 PDT 2024
+- Sat Mar 30 02:46:03 PDT 2024
 Sorted database in ascending order by: rating
-Sat Mar 30 02:46:32 PDT 2024
+- Sat Mar 30 02:46:32 PDT 2024
 Attempted search on database
-Sat Mar 30 02:46:41 PDT 2024
+- Sat Mar 30 02:46:41 PDT 2024
 Toggled favourite for: Pho You
-Sat Mar 30 02:46:54 PDT 2024
+- Sat Mar 30 02:46:54 PDT 2024
 Added new menu item to: Pho You
-Sat Mar 30 02:47:00 PDT 2024
+- Sat Mar 30 02:47:00 PDT 2024
 Toggled favourite for: Pho You
+
+# Phase 4: Task 3
+For refactoring possibilities, I found that in Restaurant class,
+I may be able to improve Single Responsibility Principle by
+separating Restaurant and Menu-related code. I would make a new
+class called Menu that holds menu items, calculates average price, 
+and references the corresponding restaurant. Additional possible 
+refactoring may have to do with my UI tabs, where there are 
+duplicate code that can likely be put into the Tab superclass.

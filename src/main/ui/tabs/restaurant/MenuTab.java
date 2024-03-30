@@ -26,7 +26,7 @@ public class MenuTab extends Tab {
     private JButton refreshButton;
 
     // Tab Specific fields
-    Restaurant selectedRes;
+    private Restaurant selectedRes;
     private GridBagConstraints grid;
 
     //REQUIRES: nothing
