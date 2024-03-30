@@ -18,6 +18,8 @@ public class EventTest {
 
     private Event e1;
     private Date d1;
+
+    private Event eNull;
 	
 	//NOTE: these tests might fail if time at which line (2) below is executed
 	//is different from time that line (1) is executed.  Lines (1) and (2) must
@@ -30,6 +32,8 @@ public class EventTest {
 
         e1 = new Event("Searched restaurant");
         d1 = Calendar.getInstance().getTime();
+
+        eNull = null;
 	}
 	
 	@Test
@@ -46,6 +50,14 @@ public class EventTest {
     @Test
     public void testEquals() {
         assertFalse(e.equals(e1));
+        assertFalse(e.equals(d1));
+        assertFalse(e.equals(eNull));
         assertTrue(e.equals(e));
+    }
+
+    @Test
+    public void testHashCode() {
+        assertEquals(e.hashCode(), e.hashCode());
+        assertNotEquals(e.hashCode(), e1.hashCode());
     }
 }
