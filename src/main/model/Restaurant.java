@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
+import model.event.EventLog;
+import model.event.Event;
+
 // Ths class represents information about a restaurant
 public class Restaurant implements Writable {
     private String name;
@@ -66,6 +69,8 @@ public class Restaurant implements Writable {
     // MODIFIES: this
     // EFFECTS: toggles favourite between true and false
     public void toggleFavourite() {
+        EventLog.getInstance().logEvent(new Event("Toggled favourite for: " + this.name));
+
         if (favourite) {
             favourite = false;
         } else {
@@ -88,12 +93,13 @@ public class Restaurant implements Writable {
     }
 
     public void addToMenu(MenuItem item) {
+        EventLog.getInstance().logEvent(new Event("Added new menu item to: " + this.name));
         menu.add(item);
     }
 
     //REQUIRES: X and Y values should be within [-100,100] (For the sake of simplicity)
     //MODIFIES: nothing
-    //EFFECTS: Returns aboslute distance of restaurant to current location
+    //EFFECTS: Returns absolute distance of restaurant to current location
     public double getDistance(Location location) {
         double targetX = this.location.getX();
         double targetY = this.location.getY();

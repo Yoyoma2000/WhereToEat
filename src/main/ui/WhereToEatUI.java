@@ -3,6 +3,8 @@ package ui;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import model.*;
+import model.event.Event;
+import model.event.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tabs.database.AddResTab;
@@ -10,7 +12,10 @@ import ui.tabs.database.FileTab;
 import ui.tabs.database.HomeTab;
 import ui.tabs.database.ListTab;
 
+
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -41,7 +46,10 @@ public class WhereToEatUI extends JFrame {
     public WhereToEatUI() {
         super("Where To Eat?");
         setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+
         //setLayout(new BorderLayout());
 
         initializeDatabase();
@@ -54,6 +62,13 @@ public class WhereToEatUI extends JFrame {
         add(sidebar);
         setBackground(Color.GREEN);
         setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                printLog();
+                System.exit(0);
+            }
+        });
     }
 
     public Database getDatabase() {
@@ -127,5 +142,12 @@ public class WhereToEatUI extends JFrame {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
         database.resetProcessedDataBase();
+    }
+
+    public void printLog() {
+        EventLog el = EventLog.getInstance();
+        for (Event next : el) {
+            System.out.println(next.toString());
+        }
     }
 }

@@ -58,3 +58,25 @@ just want to see their options.
 - You can locate my visual component by looking at home screen, buttons, and save/load
 - You can save the state of my application by going to file tab and pressing save icon
 - You can reload the state of my application by going to load tab and pressing load icon
+
+# Phase 4: Task 2
+Sat Mar 30 02:44:02 PDT 2024
+Added new restaurant: BBQ King
+Sat Mar 30 02:45:29 PDT 2024
+Added new restaurant: Pho You
+Sat Mar 30 02:45:33 PDT 2024
+Reset database to original state
+Sat Mar 30 02:45:46 PDT 2024
+Sorted database in descending order by: name
+Sat Mar 30 02:45:57 PDT 2024
+Sorted database in descending order by: rating
+Sat Mar 30 02:46:03 PDT 2024
+Sorted database in ascending order by: rating
+Sat Mar 30 02:46:32 PDT 2024
+Attempted search on database
+Sat Mar 30 02:46:41 PDT 2024
+Toggled favourite for: Pho You
+Sat Mar 30 02:46:54 PDT 2024
+Added new menu item to: Pho You
+Sat Mar 30 02:47:00 PDT 2024
+Toggled favourite for: Pho You
